@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ 	<!-- from Main Activity -->
+    <string name="app_name">Learn By Heart</string>
+    <string name="toast_main_activity_no_dictionaries">Por favor, crie um novo dicionário</string>
+    <string name="btnOpenActivityTerms">Termos</string>
+    <string name="btnOpenActivityDictionaries">Dicionários</string>
+    <string name="btnOpenActivityAlarms">Memorizador</string>
+    <string name="btnFeedback">Feedback</string>
+    <string name="send_feedback_fail">Não há clientes de email instalados!</string>
+<!--     <string name="en_btnOpenActivityAccounts">Account</string> -->
+<!--     <string name="en_btnOpenActivityShare">Share This</string> -->
+<!--     <string name="en_btnOpenActivityAbout">About</string> -->
+<!--     <string name="en_btnOpenActivityFeedback">Feedback</string> -->
+    
+    
+    <!-- from Term Activity -->
+    <string name="tv_add_term">Criar termo</string>
+    <string name="tv_edit_term">Editar termo</string>
+    <string name="action_settings">Configurações</string>
+    <string name="action_logout">Desconectar</string>
+    <string name="action_sincronize">Sincronizar</string>
+    <string name="ActionBtnAdd">Crie um novo termo</string>
+    <string name="ActionBtnSave">Salvar o termo</string>
+    <string name="ActionBtnSettings">Configurações</string>
+    <string name="etHintWord">Palavra</string>
+    <string name="etHintMeaning">Significado</string>
+    <string name="etHintExample">Exemplo</string>
+    <string name="etHintComment">Comentário (opcional)</string>
+    
+    <string name="btnActionBar_create">Crie um novo termo</string>
+    <string name="btnActionBar_save">Salvar</string>
+    <string name="btnActionBar_Cancel">Cancelar</string>
+    
+    <!-- on ActivityTerms and ActivityDictionaries -->
+    <string name="deleteConfirm">Confirmação</string>
+    <string name="deleteConfirmQuestion">Você realmente quer deletar</string>
+    <string name="deleteConfirmPositive">Sim</string>
+    <string name="deleteConfirmNegavite">Não</string>
+    <!--  only on ActivityDictionaries -->
+   	<string name="deleteConfirmWarning"> \n\n(Esta ação deletará permanentemente todos os termos deste dicionário!)</string>
+   	
+	<!-- from Add Edit Term Activity -->
+	<string name="toast_add_edit_term_activity_no_word">Escreva uma palavra</string>
+	
+    <!-- from Dictionary Activity -->
+    <string name="tv_dictionary_activity_title">Dicionário</string>
+    <string name="tv_dictionary_activity_legend">Digite uma descrição:</string>
+    <string name="btn_dictionary_activity_save">Salvar</string>
+    <string name="btn_dictionary_activity_cancel">Cancelar</string>
+    <string name="btn_dictionary_activity_add_dictionary">Novo Dicionário</string>
+    <string name="btn_dictionary_activity_no_name">Digite um novo para o dicionário</string>
+    
+    <string name="message_notification">Qual é o significado de </string>
+    
+    <!-- from Display Term Activity -->
+	<string name="tv_word_activity_display">Palavra</string>
+	<string name="tv_meaning_activity_display">Significado</string>
+	<string name="btn_correct_activity_display">Eu sabia</string>
+	<string name="btn_wrong_activity_display">Esqueci</string>
+	<string name="toast_language_not_supported">A língua deste dicionário ainda não é suportada</string>
+	<string name="toast_silence">Telefone em odo silencioso</string>
+	
+	<string name="btn_create">Novo</string>
+	
+    <!-- from Reminder Settings Activity -->
+    <string name="notifications_enable_disable_title">Notificações</string>
+    <string name="notifications_enabled">Habilitado</string>
+    <string name="notifications_disabled">Desabilitado</string>
+    <string name="frequence_of_notifications">Frequência das notificações</string>
+    <string name="frequence_of_notifications_description">Intervalo entre notificações</string>
+    <string-array name="frequence_options_entries">
+        <item>1 minuto</item>
+        <item>1 hora</item>
+        <item>2 horas</item>
+        <item>3 horas</item>
+        <item>4 horas</item>
+        <item>5 horas</item>
+        <item>6 horas</item>
+        <item>7 horas</item>
+        <item>8 horas</item>
+        <item>9 horas</item>
+        <item>10 horas</item>
+        <item>11 horas</item>
+        <item>12 horas</item>
+        <item>13 horas</item>
+        <item>14 horas</item>
+        <item>15 horas</item>
+        <item>16 horas</item>
+        <item>17 horas</item>
+        <item>18 horas</item>
+        <item>19 horas</item>
+        <item>20 horas</item>
+        <item>21 horas</item>
+        <item>22 horas</item>
+        <item>23 horas</item>
+        <item>24 horas</item>
+    </string-array>
+    <string-array name="frequence_options_entries_values">
+        <item>60000</item>
+        <item>360000</item>
+        <item>120</item>
+        <item>180</item>
+        <item>240</item>
+        <item>300</item>
+        <item>360</item>
+        <item>420</item>
+        <item>480</item>
+        <item>540</item>
+        <item>600</item>
+        <item>660</item>
+        <item>720</item>
+        <item>780</item>
+        <item>840</item>
+        <item>900</item>
+        <item>960</item>
+        <item>1020</item>
+        <item>1080</item>
+        <item>1140</item>
+        <item>1200</item>
+        <item>1260</item>
+        <item>1320</item>
+        <item>1380</item>
+        <item>1440</item>
+    </string-array>
+
+    <string-array name="available_languages_descriptions">
+        <item>Inglês</item>
+        <item>Português</item>
+        <item>Francês</item>
+    </string-array>
+    
+    <string-array name="available_languages_value">
+        <item>en</item>
+        <item>pt</item>
+        <item>fr</item>
+    </string-array>
+    
+    <string-array name="empty_array">
+    </string-array>
+    
+    <string name="dictionaries_to_be_questioned">Dicionários Questionados</string>
+    <string name="dictionaries_to_be_questioned_description">Selecione os dicionarios que serão questionados</string>
+    
+    <!-- from activity_add_edit_dictionary.xml -->
+    <string name="dictionary_name">Nome</string>
+    <string name="dictionary_language">Língua</string>
+</resources>

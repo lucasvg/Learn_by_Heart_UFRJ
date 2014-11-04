@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="activity_adicionar_editar_termo_title">Criar Termo</string>
+    <string name="activity_adicionar_editar_termo_et_hint_palavra">Palavra</string>
+    <string name="activity_adicionar_editar_termo_et_hint_significado">Significado</string>
+    <string name="activity_adicionar_editar_termo_et_hint_exemplo">Exemplo</string>
+</resources>

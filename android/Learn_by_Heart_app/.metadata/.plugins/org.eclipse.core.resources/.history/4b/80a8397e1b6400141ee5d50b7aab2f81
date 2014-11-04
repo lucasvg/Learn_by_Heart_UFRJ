@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <EditText
+        android:id="@+id/activity_signup_edUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:hint="@string/signup_activity_hint_name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/activity_signup_edUserEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/activity_signup_edUserName"
+        android:layout_below="@+id/activity_signup_edUserName"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="signup_activity_hint_email"
+        android:inputType="textEmailAddress" />
+    
+    <EditText
+        android:id="@+id/activity_signup_edUserPwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/activity_signup_edUserEmail"
+        android:layout_below="@+id/activity_signup_edUserEmail"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="signup_activity_hint_password"
+        android:inputType="textPassword" />
+    
+    <EditText
+        android:id="@+id/activity_signup_edUserPwdRepeat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/activity_signup_edUserPwd"
+        android:layout_below="@+id/activity_signup_edUserPwd"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+	<Button
+	    android:id="@+id/activity_signup_bSignUp"
+	    android:layout_width="170dp"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/activity_signup_edUserPwdRepeat"
+	    android:layout_centerHorizontal="true"
+	    android:layout_marginTop="42dp"
+	    android:text="Sign Up" />
+
+</RelativeLayout>

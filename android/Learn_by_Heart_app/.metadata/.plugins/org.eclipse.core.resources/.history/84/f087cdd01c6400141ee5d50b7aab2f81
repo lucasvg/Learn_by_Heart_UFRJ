@@ -1,0 +1,125 @@
+package com.learnbyheart.activity;
+
+import java.io.InputStream;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+
+import com.learnbyheart.GLOBAL;
+import com.learnbyheart.R;
+
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class SignupActivity extends Activity implements android.view.View.OnClickListener {
+	private Button btnSignup;
+	private ProgressDialog progress;
+	
+	private Document mainDoc;
+	// use ifconfig in linux to get actual ip
+	private String urlStr;
+	private String outStr;
+	
+	private EditText edUserName;
+	private EditText edUserLogin;
+	private EditText edUserPwd;
+	private EditText edUserEmail;
+	
+	private final String MyPREFERENCES = GLOBAL.MyPREFERENCES;
+	
+	protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_signup);
+        
+        btnSignup = (Button) findViewById(R.id.activity_signup_bSignUp);
+		btnSignup.setOnClickListener((OnClickListener) this);
+		edUserName = (EditText) findViewById(R.id.activity_signup_edUserName);
+		edUserPwd = (EditText) findViewById(R.id.activity_signup_edUserPwd);
+		edUserEmail = (EditText) findViewById(R.id.activity_signup_edUserEmail);
+		edUserLogin = edUserEmail;
+		
+		// allow network in the UI thread
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		StrictMode.setThreadPolicy(policy);
+    }
+	
+	@Override
+	public void onClick(View v) {
+		int id = v.getId();
+		
+		if (id == R.id.activity_signup_bSignUp) {
+			progress = new ProgressDialog(this);
+			progress.setMessage("accessing the cloud");
+			progress.setTitle("wait");
+			// progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			progress.setCancelable(true);
+			progress.setProgress(0);
+			progress.show();
+			
+			urlStr = GLOBAL.urlSignup(edUserName.getText().toString(), 
+					edUserLogin.getText().toString(), 
+					edUserPwd.getText().toString(),
+					edUserEmail.getText().toString());
+
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					Log.e("url", urlStr);
+					doLongTask();
+
+					runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							progress.dismiss();
+							Log.v("taskdone", "==== taskdone");
+
+							// if outStr = null, then httpConnection failed
+							if(outStr == null){
+								 Toast.makeText(getApplicationContext(), "Failed to sign up!", Toast.LENGTH_LONG).show();
+							}else{
+								Log.e("Session outStr", outStr);
+								Toast.makeText(getApplicationContext(), "Sign up successful!", Toast.LENGTH_LONG).show();
+								finish();
+							}
+						}
+					});
+				}
+			}).start();
+		}
+	}
+	
+	void doLongTask() {
+		try {
+			outStr = "empty";
+			InputStream in;
+			in = GLOBAL.OpenHttpConnection(urlStr);
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = dbf.newDocumentBuilder();
+			mainDoc = builder.parse(in);
+
+			NodeList nodeList = mainDoc.getElementsByTagName("ns:return");
+			outStr = nodeList.item(0).getChildNodes().item(0)
+							.getNodeValue();
+
+		} catch (Exception ex) {
+			Log.v("exception", ex.toString());
+			outStr = null;
+		}
+	}
+
+}

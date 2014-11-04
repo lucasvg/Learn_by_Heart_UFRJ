@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="de.greenrobot.daogenerator.Schema"/>
+<fullyQualifiedTypeName name="de.greenrobot.daogenerator.Property"/>
+<fullyQualifiedTypeName name="de.greenrobot.daogenerator.Entity"/>
+<fullyQualifiedTypeName name="android.app.ListActivity"/>
+<fullyQualifiedTypeName name="android.view.View"/>
+<fullyQualifiedTypeName name="android.view.LayoutInflater"/>
+<fullyQualifiedTypeName name="android.view.ViewGroup"/>
+<fullyQualifiedTypeName name="android.support.v7.appcompat.R"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="android.widget.ListView"/>
+<fullyQualifiedTypeName name="com.learnbyheart.UtilFunctions"/>
+<fullyQualifiedTypeName name="android.widget.ArrayAdapter"/>
+<fullyQualifiedTypeName name="android.R.anim"/>
+<fullyQualifiedTypeName name="android.support.v7.app.ActionBarActivity"/>
+<fullyQualifiedTypeName name="android.content.Intent"/>
+<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.dao.DictionaryDao"/>
+<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.bean.Language"/>
+<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.dao.LanguageDao"/>
+<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.dao.DaoMaster.DevOpenHelper"/>
+<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.bean.Dictionary"/>
+<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.dao.UserTypeDao"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.dao.UserDao"/>
+<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.bean.UserType"/>
+<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.bean.User"/>
+<fullyQualifiedTypeName name="android.app.Activity"/>
+<fullyQualifiedTypeName name="android.R"/>
+<fullyQualifiedTypeName name="android.R.layout"/>
+<fullyQualifiedTypeName name="com.learnbyheart.R"/>
+<fullyQualifiedTypeName name="com.learnbyheart.R.layout"/>
+<fullyQualifiedTypeName name="android.widget.Button"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="android.widget.ImageButton"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="java.lang.Override"/>
+<fullyQualifiedTypeName name="android.widget.EditText"/>
+<fullyQualifiedTypeName name="android.provider.Settings.Global"/>
+<fullyQualifiedTypeName name="android.widget.Toast"/>
+<fullyQualifiedTypeName name="android.content.SharedPreferences"/>
+<fullyQualifiedTypeName name="android.content.SharedPreferences.Editor"/>
+<fullyQualifiedTypeName name="java.lang.Long"/>
+<fullyQualifiedTypeName name="android.view.MenuItem"/>
+<fullyQualifiedTypeName name="com.learnbyheart.GLOBAL"/>
+</qualifiedTypeNameHistroy>

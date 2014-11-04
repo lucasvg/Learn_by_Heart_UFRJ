@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <SwitchPreference
+        android:title="@string/notifications_enable_disable_title"
+        android:key="notification"
+        android:switchTextOn="ON"
+        android:switchTextOff="OFF"
+        android:defaultValue="true"
+        android:summaryOn="@string/notifications_enabled"
+        android:summaryOff="@string/notifications_disabled"
+        ></SwitchPreference>
+    
+    <ListPreference
+        android:title="@string/frequence_of_notifications"
+        android:summary="@string/frequence_of_notifications_description"
+        android:key="notificationFrequence"
+        android:entries="@array/frequence_options_entries"
+        android:entryValues="@array/frequence_options_entries_values" ></ListPreference>
+    
+    <MultiSelectListPreference
+        android:title="@string/dictionaries_to_be_questioned"
+        android:summary="@string/dictionaries_to_be_questioned_description"
+        android:key="dictionaries_questioned"
+        android:defaultValue="@array/empty_array" ></MultiSelectListPreference>
+    
+    
+    </PreferenceScreen>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:yourapp="http://schemas.android.com/apk/res-auto" >
+
+ <item
+        android:id="@+id/itemTextToSpeech"
+        android:icon="@drawable/abc_ic_voice_search_api_holo_light"
+        android:title="@string/ActionBtnSave"
+        yourapp:showAsAction="ifRoom"/>
+ 
+</menu>

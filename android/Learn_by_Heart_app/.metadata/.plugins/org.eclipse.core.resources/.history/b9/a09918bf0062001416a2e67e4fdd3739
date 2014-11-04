@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+	<RelativeLayout 
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="46dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+	
+<!-- 	     <ImageButton -->
+<!-- 	         android:id="@+id/ibOpenActivityTerms" -->
+<!-- 	         android:layout_width="wrap_content" -->
+<!-- 	         android:layout_height="wrap_content" -->
+<!-- 	         android:background="@null" -->
+<!-- 	         android:contentDescription="@string/btnOpenActivityTerms" -->
+<!-- 	         android:src="@drawable/terms_icon" /> -->
+	
+<!-- 	     <ImageButton -->
+<!-- 	         android:id="@+id/ibOpenActivityDictionaries" -->
+<!-- 	         android:layout_width="wrap_content" -->
+<!-- 	         android:layout_height="wrap_content" -->
+<!-- 	         android:layout_alignTop="@+id/ibOpenActivityTerms" -->
+<!-- 	         android:layout_marginLeft="48dp" -->
+<!-- 	         android:layout_toRightOf="@+id/ibOpenActivityTerms" -->
+<!-- 	         android:background="@null" -->
+<!-- 	         android:contentDescription="@string/btnOpenActivityDictionaries" -->
+<!-- 	         android:src="@drawable/dictionary_icon" /> -->
+	
+<!-- 	     <ImageButton -->
+<!-- 	         android:id="@+id/ibOpenActivityAlarms" -->
+<!-- 	         android:layout_width="wrap_content" -->
+<!-- 	         android:layout_height="wrap_content" -->
+<!-- 	         android:layout_alignLeft="@+id/ibOpenActivityTerms" -->
+<!-- 	         android:layout_below="@+id/ibOpenActivityTerms" -->
+<!-- 	         android:layout_marginTop="47dp" -->
+<!-- 	         android:background="@null" -->
+<!-- 	         android:contentDescription="@string/btnOpenActivityAlarms" -->
+<!-- 	         android:src="@drawable/alarm_icon" /> -->
+	
+<!-- 	     <ImageButton -->
+<!-- 	         android:id="@+id/ibFeedback" -->
+<!-- 	         android:layout_width="wrap_content" -->
+<!-- 	         android:layout_height="wrap_content" -->
+<!-- 	         android:layout_alignLeft="@+id/ibOpenActivityDictionaries" -->
+<!-- 	         android:layout_alignTop="@+id/ibOpenActivityAlarms" -->
+<!-- 	         android:background="@null" -->
+<!-- 	         android:contentDescription="@string/btnFeedback" -->
+<!-- 	         android:src="@drawable/feedback" /> -->
+
+		<ImageButton
+	         android:id="@+id/ibOpenActivityDictionary"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:background="@null"
+	         android:contentDescription="@string/btnOpenActivityDictionaries"
+	         android:src="@drawable/terms_icon" />
+		
+	     <ImageButton
+	         android:id="@+id/ibOpenActivityAlarms"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_below="@+id/ibOpenActivityDictionary"
+	         android:layout_marginTop="47dp"
+	         android:background="@null"
+	         android:contentDescription="@string/btnOpenActivityAlarms"
+	         android:src="@drawable/alarm_icon" />
+	
+     </RelativeLayout>
+     
+</RelativeLayout>
