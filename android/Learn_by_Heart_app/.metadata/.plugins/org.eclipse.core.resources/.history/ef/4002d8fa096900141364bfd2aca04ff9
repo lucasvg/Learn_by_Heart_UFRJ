@@ -49,8 +49,8 @@
 	    android:layout_below="@+id/activity_login_bLogin"
 	    android:layout_centerHorizontal="true"
 	    android:layout_marginTop="22dp"
-	    android:background="@android:color/transparent"
-	    android:textColor="#808080"
+	    android:background="@color/white"
+	    android:textColor="#80000000"
 	    android:text="Sign Up" />
 
 </RelativeLayout>

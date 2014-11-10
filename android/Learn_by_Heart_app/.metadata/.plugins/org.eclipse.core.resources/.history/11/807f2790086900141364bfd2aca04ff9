@@ -12,8 +12,6 @@ public class GLOBAL {
 	public static final String userLoggedSession = "userLoggedSession";
 	public static final String userLoggedId = "userLoggedId";
 	
-	public static final String hasOpenedLoginActivity = "hasOpenedLoginActivity";
-	
 //	use ifconfig in linux to get actual ip
 	private static final String ip = "ec2-54-173-93-181.compute-1.amazonaws.com";
 	

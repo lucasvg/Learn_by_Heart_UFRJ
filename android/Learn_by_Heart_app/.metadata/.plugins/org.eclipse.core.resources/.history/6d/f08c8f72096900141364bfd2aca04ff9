@@ -74,20 +74,19 @@ android.view.View.OnClickListener {
 		if (!(sharedPreferences.contains(GLOBAL.userLoggedSession) && (sharedPreferences.getString(GLOBAL.userLoggedSession, "-1")!="-1"))){
 
 			// IF has opened the login activity once
-			if ((sharedPreferences.contains(GLOBAL.hasOpenedLoginActivity) && (sharedPreferences.getBoolean(GLOBAL.hasOpenedLoginActivity, false)))){
-				Editor sharedPreferencesEditor = sharedPreferences.edit();
-				sharedPreferencesEditor.putBoolean(GLOBAL.hasOpenedLoginActivity, false);
-				sharedPreferencesEditor.apply();
-				Log.e("fechou", "fechou");
-				finish();
-			}else{
+			if (!(sharedPreferences.contains(GLOBAL.hasOpenedLoginActivity) || !(sharedPreferences.getBoolean(GLOBAL.hasOpenedLoginActivity, false)))){
 				Editor sharedPreferencesEditor = sharedPreferences.edit();
 				sharedPreferencesEditor.putBoolean(GLOBAL.hasOpenedLoginActivity, true);
 				sharedPreferencesEditor.apply();
 				Intent i = new Intent("android.intent.action.login");
 				startActivity(i);	
 				Log.e("abriu", "abriu");
-				
+			}else{
+				Editor sharedPreferencesEditor = sharedPreferences.edit();
+				sharedPreferencesEditor.putBoolean(GLOBAL.hasOpenedLoginActivity, false);
+				sharedPreferencesEditor.apply();
+				Log.e("abriu", "abriu");
+				finish();
 			}
 			
 		}

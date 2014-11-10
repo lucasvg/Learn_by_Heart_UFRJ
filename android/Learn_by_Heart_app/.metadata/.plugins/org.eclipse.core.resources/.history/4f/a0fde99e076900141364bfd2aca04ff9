@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,31 +64,13 @@ android.view.View.OnClickListener {
 	}
 	
 	@Override
-	protected void onResume() {
-		super.onResume();
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		super.onActivityResult(arg0, arg1, arg2);
 		
 		// VERIFY LOGGED USER
 		sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-		// IF is logged
-		if (!(sharedPreferences.contains(GLOBAL.userLoggedSession) && (sharedPreferences.getString(GLOBAL.userLoggedSession, "-1")!="-1"))){
-
-			// IF has opened the login activity once
-			if ((sharedPreferences.contains(GLOBAL.hasOpenedLoginActivity) && (sharedPreferences.getBoolean(GLOBAL.hasOpenedLoginActivity, false)))){
-				Editor sharedPreferencesEditor = sharedPreferences.edit();
-				sharedPreferencesEditor.putBoolean(GLOBAL.hasOpenedLoginActivity, false);
-				sharedPreferencesEditor.apply();
-				Log.e("fechou", "fechou");
-				finish();
-			}else{
-				Editor sharedPreferencesEditor = sharedPreferences.edit();
-				sharedPreferencesEditor.putBoolean(GLOBAL.hasOpenedLoginActivity, true);
-				sharedPreferencesEditor.apply();
-				Intent i = new Intent("android.intent.action.login");
-				startActivity(i);	
-				Log.e("abriu", "abriu");
-				
-			}
-			
+		if (!(sharedPreferences.contains("userLoggedSession") && (sharedPreferences.getString(GLOBAL.userLoggedSession, "-1")!="-1"))){
+			finish();
 		}
 		// END VERIFY LOGGED USER
 	}
