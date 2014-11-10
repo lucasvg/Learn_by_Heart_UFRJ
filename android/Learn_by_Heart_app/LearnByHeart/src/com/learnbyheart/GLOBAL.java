@@ -13,15 +13,15 @@ public class GLOBAL {
 	public static final String userLoggedId = "userLoggedId";
 	
 //	use ifconfig in linux to get actual ip
-	private static final String ip = "192.168.182.159";
+	private static final String ip = "ec2-54-173-93-181.compute-1.amazonaws.com";
 	
 	public static final String urlLogin(String userLogin, String pwd){
-		return String.format("http://" + ip + ":8080/axis2/services/service/lazyLogin?userLogin=%s&pwd=%s", userLogin, pwd);
+		return String.format("http://" + ip + "/axis2/services/service/lazyLogin?userLogin=%s&pwd=%s", userLogin, pwd);
 	}
 	
 //	use ifconfig in linux to get actual ip
 	public static final String urlSignup(String name, String userLogin, String pwd, String email){
-		return String.format("http://" + ip + ":8080/axis2/services/service/createUser?name=%s&login=%s&password=%s&email=%s", name, userLogin, pwd, email);
+		return String.format("http://" + ip + "/axis2/services/service/createUser?name=%s&login=%s&password=%s&email=%s", name, userLogin, pwd, email);
 	}
 	
 	public static final InputStream OpenHttpConnection(String urlString) throws IOException {

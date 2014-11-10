@@ -48,8 +48,6 @@ public abstract class Database_Base{
 //            e.printStackTrace();
         } catch (ClassNotFoundException e) {
             ret = Global.NOT_OK + "ClassNotFoundException";
-        } catch (Exception e) {
-            ret = Global.NOT_OK + "Unhandled Exception";
         }
         return ret;
     }
