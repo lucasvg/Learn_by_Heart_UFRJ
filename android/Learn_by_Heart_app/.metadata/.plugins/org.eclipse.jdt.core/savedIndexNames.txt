@@ -1,5 +1,4 @@
 INDEX VERSION 1.126+/home/lucas/Development/Learn_by_Heart UFRJ/android/Learn_by_Heart_app/.metadata/.plugins/org.eclipse.jdt.core
-1377251446.index
 804423280.index
 3076101763.index
 594265203.index
@@ -9,7 +8,6 @@ INDEX VERSION 1.126+/home/lucas/Development/Learn_by_Heart UFRJ/android/Learn_by
 2330903632.index
 697131460.index
 2196695520.index
-842468731.index
 3977926266.index
 1529254982.index
 721525621.index

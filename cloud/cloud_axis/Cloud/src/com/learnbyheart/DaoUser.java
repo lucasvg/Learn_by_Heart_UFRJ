@@ -50,8 +50,17 @@ public class DaoUser {
                     userTypeHelper = Global.defaultUserType;
                 
                 if ((name.contains(Global.token)) || (login.contains(Global.token)) || (password.contains(Global.token)) || (email.contains(Global.token))) {
-                    ret = Global.NOT_OK + "user's properties must not contain '" + Global.token + "'";
-                } else {
+//                    ret = Global.NOT_OK + "user's properties must not contain '" + Global.token + "'";
+                    ret = null;
+                }if ((name.equals("")) || (login.equals("")) || (password.equals("")) || (email.equals(""))) {
+                    ret = Global.NOT_OK + "user's properties must not be empty'";
+                    ret = null;
+                }if ((name.isEmpty()) || (login.isEmpty()) || (password.isEmpty()) || (email.isEmpty())) {
+                    ret = Global.NOT_OK + "user's properties must not be empty'";
+                    ret = null;
+                }  
+                
+                else {
                     String sql = "INSERT INTO user(name, login, password, email, user_type) VALUES ('"
                             + name + "','"
                             + login + "','"

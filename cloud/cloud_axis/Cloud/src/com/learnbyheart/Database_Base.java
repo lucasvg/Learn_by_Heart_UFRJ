@@ -6,10 +6,7 @@
 package com.learnbyheart;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import static com.learnbyheart.Global.log;
 
 /**
  *
