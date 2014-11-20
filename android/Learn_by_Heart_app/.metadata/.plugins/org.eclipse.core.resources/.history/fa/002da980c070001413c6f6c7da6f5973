@@ -15,7 +15,7 @@ public class GLOBAL {
 	public static final String hasOpenedLoginActivity = "hasOpenedLoginActivity";
 	
 //	use ifconfig in linux to get actual ip
-	private static final String ip = "ec2-54-173-106-139.compute-1.amazonaws.com";
+	private static final String ip = "ec2-54-173-93-181.compute-1.amazonaws.com";
 	
 	public static final String urlLogin(String userLogin, String pwd){
 		return String.format("http://" + ip + "/axis2/services/service/lazyLogin?userLogin=%s&pwd=%s", userLogin, pwd);
