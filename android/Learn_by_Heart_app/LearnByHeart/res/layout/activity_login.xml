@@ -11,6 +11,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
         android:ems="10"
+        android:hint="@string/signup_activity_hint_email"
         android:inputType="textEmailAddress" />
 
     <EditText
@@ -21,6 +22,7 @@
         android:layout_below="@+id/activity_login_edUserLogin"
         android:layout_marginTop="62dp"
         android:ems="10"
+        android:hint="@string/signup_activity_hint_password"
         android:inputType="textPassword" />
 
 <!--     <ImageButton -->

@@ -34,7 +34,8 @@ public class LoginActivity extends Activity implements android.view.View.OnClick
 	
 	private Document mainDoc;
 	private String urlStr;
-	private String outStr;
+	private String userSession;
+	private Long userId;
 	
 	private EditText edUserLogin;
 	private EditText edUserPwd;
@@ -88,14 +89,16 @@ public class LoginActivity extends Activity implements android.view.View.OnClick
 							progress.dismiss();
 							Log.v("taskdone", "==== taskdone");
 
-							// if outStr = null, then httpConnection failed
-							if(outStr == null){
+							// if userSession = null, then httpConnection failed
+							if(userSession == null){
 								 Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_LONG).show();
 							}else{
-								Log.e("Session outStr", outStr);
+								Log.e("Session userSession", userSession);
 								SharedPreferences sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 								Editor sharedPreferencesEditor = sharedPreferences.edit();
-								sharedPreferencesEditor.putString(GLOBAL.userLoggedSession, outStr);
+								sharedPreferencesEditor.putString(GLOBAL.userLoggedSession, userSession);
+								sharedPreferencesEditor.putLong(GLOBAL.userLoggedId, userId);
+								Log.e("teste", userSession);
 								sharedPreferencesEditor.apply();
 								finish();
 							}
@@ -108,7 +111,8 @@ public class LoginActivity extends Activity implements android.view.View.OnClick
 	
 	void doLongTask() {
 		try {
-			outStr = "empty";
+			userSession = "empty";
+			userId = 0L;
 			InputStream in;
 			in = GLOBAL.OpenHttpConnection(urlStr);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -116,12 +120,13 @@ public class LoginActivity extends Activity implements android.view.View.OnClick
 			mainDoc = builder.parse(in);
 
 			NodeList nodeList = mainDoc.getElementsByTagName("ns:return");
-			outStr = nodeList.item(0).getChildNodes().item(0)
-							.getNodeValue();
+			userSession = nodeList.item(0).getTextContent();
+			userId = Long.parseLong(nodeList.item(1).getTextContent());
 
 		} catch (Exception ex) {
 			Log.v("exception", ex.toString());
-			outStr = null;
+			userSession = null;
+			userId = null;
 		}
 	}
 
