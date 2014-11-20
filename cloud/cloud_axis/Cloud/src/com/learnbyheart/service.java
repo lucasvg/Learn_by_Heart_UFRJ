@@ -25,9 +25,11 @@ public class service {
         return DouaController.lazyLogin(userLogin, pwd);
     }
     
-    public String managementReportA(String sessionHash, int multiplyTable) {
-        return DouaController.managementReportA(sessionHash, multiplyTable);
-    }
+    // ============== SBVB CODE ====================
+//    public String managementReportA(String sessionHash, int multiplyTable) {
+//        return DouaController.managementReportA(sessionHash, multiplyTable);
+//    }
+    // ============== end SBVB CODE ====================
     
     public static String[] readUser(){
         return DaoUser.readUser();
@@ -38,4 +40,9 @@ public class service {
         DouaController.loadDouaConfig();
         return result;
     }
+    
+    public static String[] getLanguages(String sessionHash){
+        return DouaController.getLanguages(sessionHash);
+    }
+    
 }

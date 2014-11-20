@@ -19,7 +19,7 @@
     <string name="tv_edit_term">Editar termo</string>
     <string name="action_settings">Configurações</string>
     <string name="action_logout">Desconectar</string>
-    <string name="action_sincronize">Sincronizar</string>
+    <string name="action_synchronize">Sincronizar</string>
     <string name="ActionBtnAdd">Crie um novo termo</string>
     <string name="ActionBtnSave">Salvar o termo</string>
     <string name="ActionBtnSettings">Configurações</string>

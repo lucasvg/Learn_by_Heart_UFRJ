@@ -96,9 +96,8 @@ public class LoginActivity extends Activity implements android.view.View.OnClick
 								Log.e("Session userSession", userSession);
 								SharedPreferences sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 								Editor sharedPreferencesEditor = sharedPreferences.edit();
-								sharedPreferencesEditor.putString(GLOBAL.userLoggedSession, userSession);
-								sharedPreferencesEditor.putLong(GLOBAL.userLoggedId, userId);
-								Log.e("teste", userSession);
+								sharedPreferencesEditor.putString(GLOBAL.USER_LOGGED_SESSION, userSession);
+								sharedPreferencesEditor.putLong(GLOBAL.USER_LOGGED_ID, userId);
 								sharedPreferencesEditor.apply();
 								finish();
 							}

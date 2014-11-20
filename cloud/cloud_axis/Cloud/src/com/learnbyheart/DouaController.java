@@ -17,15 +17,30 @@ public class DouaController {
 
     private static final DOUA doua = new DOUA();
 
-    public static String managementReportA(String sessionHash, int multiplyTable) {
-        int thisResourceID = 43;
+    
+        // ============== SBVB CODE ====================
+//    public static String managementReportA(String sessionHash, int multiplyTable) {
+//        int thisResourceID = 43;
+//        if (doua.usecaseAuthorized(sessionHash, thisResourceID)) {            
+//            return Global.OK + "multiplyTable=" + multiplyTable;
+//        } else {
+//            return Global.NOT_OK;
+//        }
+//    }
+    // ============== end SBVB CODE ====================
+
+    public static String[] getLanguages(String sessionHash) {
+        // 41 - 4 is the default resource number. The X resource would be 4X
+        int thisResourceID = 41;
         if (doua.usecaseAuthorized(sessionHash, thisResourceID)) {            
-            return Global.OK + "multiplyTable=" + multiplyTable;
+            return DaoLanguage.readLanguages();
         } else {
-            return Global.NOT_OK;
+            System.out.println("notlooged");
+            return null;
         }
     }
 
+    
     public static String[] lazyLogin(String userLogin, String pwd) {
         String pwdHadh = DOUA.getHash(pwd);
         int sessionID = doua.createSession(userLogin, pwdHadh);
@@ -37,25 +52,39 @@ public class DouaController {
     }
 
     public static String loadDouaConfig() {
-        // load some UserGroups
-
+        
+        //setting userGroup, resourceGroup, resource and setting authorization 
         int ug_president = doua.setUserGroup("admin");
-//        int ug_manager = doua.setUserGroup("manager");
-//        int ug_secretary = doua.setUserGroup("secretary");
-
-        // load some Users
+        int rg_manRep = doua.setResorceGroup("isLoggedUser");
+        int r_RepA = doua.setResorce("isLogged", rg_manRep);
+        doua.setAuthorization(rg_manRep, ug_president);
+        
+        // LOAD Users
         List<User> listAllUser =  new DaoUser().getAllUsers();
         for(User user : listAllUser){
             doua.setUser(user.getLogin(), user.getPassword(), ug_president);
-        }
-//        int u_john = doua.setUser("admin", "admin", ug_president);
+            
+        }        
+        
+        
+        
+        // ============== SBVB CODE ====================
+        // load some UserGroups
+//        int ug_president = doua.setUserGroup("admin");
+//        int ug_manager = doua.setUserGroup("manager");
+//        int ug_secretary = doua.setUserGroup("secretary");
 
+        
+        
+        // load some Users
+//        int u_john = doua.setUser("admin", "admin", ug_president);
 //        int u_james = doua.setUser("James", "james_pwd", ug_secretary);
 //        int u_camila = doua.setUser("Camila", "camila_pwd", ug_president);
 
         // load some ResourceGroups
-        int rg_manRep = doua.setResorceGroup("see all management reports");
-        int rg_insData = doua.setResorceGroup("insert all types of data");
+//        int rg_manRep = doua.setResorceGroup("see all management reports");
+//        int rg_manRep = doua.setResorceGroup("see all management reports");
+//        int rg_insData = doua.setResorceGroup("insert all types of data");
 //        doua.setResorceGroup("RG2");
 //        doua.setResorceGroup("RG3");
 //        doua.setResorceGroup("RG4");
@@ -66,11 +95,13 @@ public class DouaController {
 //        int r_insDataA = doua.setResorce("insert data type A", rg_insData);
 //        int r_insDataB = doua.setResorce("insert data type B", rg_insData);
 //
-//         load some Authoriations
+//        load some Authoriations
 //        doua.setAuthorization(rg_manRep, ug_president);
 //        doua.setAuthorization(rg_insData, ug_president);
 //        doua.setAuthorization(rg_insData, ug_manager);
 //        doua.setAuthorization(rg_manRep, ug_secretary);
+        
+        // ============== end SBVB CODE ====================
 
         return OK;
     }

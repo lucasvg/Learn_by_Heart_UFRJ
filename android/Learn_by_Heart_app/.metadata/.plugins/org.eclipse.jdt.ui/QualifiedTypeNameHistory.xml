@@ -17,12 +17,9 @@
 <fullyQualifiedTypeName name="android.support.v7.app.ActionBarActivity"/>
 <fullyQualifiedTypeName name="android.content.Intent"/>
 <fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.dao.DictionaryDao"/>
-<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.bean.Language"/>
-<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.dao.LanguageDao"/>
 <fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.dao.DaoMaster.DevOpenHelper"/>
 <fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.bean.Dictionary"/>
 <fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.dao.UserTypeDao"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.dao.UserDao"/>
 <fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.bean.UserType"/>
 <fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.bean.User"/>
@@ -36,12 +33,19 @@
 <fullyQualifiedTypeName name="android.widget.ImageButton"/>
 <fullyQualifiedTypeName name="java.lang.Override"/>
 <fullyQualifiedTypeName name="android.widget.EditText"/>
-<fullyQualifiedTypeName name="android.provider.Settings.Global"/>
 <fullyQualifiedTypeName name="android.widget.Toast"/>
 <fullyQualifiedTypeName name="android.content.SharedPreferences"/>
 <fullyQualifiedTypeName name="android.content.SharedPreferences.Editor"/>
-<fullyQualifiedTypeName name="java.lang.Long"/>
 <fullyQualifiedTypeName name="android.view.MenuItem"/>
-<fullyQualifiedTypeName name="com.learnbyheart.GLOBAL"/>
+<fullyQualifiedTypeName name="org.w3c.dom.NodeList"/>
+<fullyQualifiedTypeName name="java.lang.Long"/>
+<fullyQualifiedTypeName name="com.learnbyheart.R.id"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.bean.Language"/>
+<fullyQualifiedTypeName name="android.provider.Settings.Global"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.learnbyheart.GenericUtilFunctions"/>
+<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.dao.LanguageDao"/>
+<fullyQualifiedTypeName name="com.learnbyheart.GLOBAL"/>
 </qualifiedTypeNameHistroy>

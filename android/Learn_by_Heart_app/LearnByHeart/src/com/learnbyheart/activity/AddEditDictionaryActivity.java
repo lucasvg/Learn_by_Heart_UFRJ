@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.learnbyheart.GLOBAL;
 import com.learnbyheart.R;
 import com.learnbyheart.greenDao.gen.bean.Dictionary;
 import com.learnbyheart.greenDao.gen.bean.Language;
@@ -53,7 +54,7 @@ public class AddEditDictionaryActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_add_edit_dictionary);
 
 		// LOAD DB
-		DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "learnbyheart-db", null);
+		DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, GLOBAL.DB_NAME, null);
 		db = helper.getWritableDatabase();
 		daoMaster = new DaoMaster(db);
 		daoSession = daoMaster.newSession();
@@ -62,7 +63,6 @@ public class AddEditDictionaryActivity extends ActionBarActivity {
 		userDao = daoSession.getUserDao();
 		userTypeDao = daoSession.getUserTypeDao();
 		
-		//LOAD dictionaryDao
 		languageList = languageDao.loadAll();
 		
 		etName = (EditText) findViewById(R.id.activity_add_edit_dictionary_et_dictionary_name);

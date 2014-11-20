@@ -1015,7 +1015,7 @@ containing a value of this type.
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
         public static final int action_searchTerm=0x7f060052;
-        public static final int action_sincronize=0x7f06004d;
+        public static final int action_synchronize=0x7f06004d;
         public static final int activity_add_edit_dictionary_et_dictionary_name=0x7f06003c;
         public static final int activity_add_edit_dictionary_sp_dictionary_language=0x7f06003e;
         public static final int activity_add_edit_dictionary_tb_dictionary_is_public=0x7f060040;
@@ -1196,7 +1196,7 @@ containing a value of this type.
         public static final int abc_shareactionprovider_share_with_application=0x7f0b000b;
         public static final int action_logout=0x7f0b0017;
         public static final int action_settings=0x7f0b0016;
-        public static final int action_sincronize=0x7f0b0018;
+        public static final int action_synchronize=0x7f0b0018;
         public static final int activity_adicionar_editar_termo_et_hint_exemplo=0x7f0b0048;
         public static final int activity_adicionar_editar_termo_et_hint_palavra=0x7f0b0046;
         public static final int activity_adicionar_editar_termo_et_hint_significado=0x7f0b0047;

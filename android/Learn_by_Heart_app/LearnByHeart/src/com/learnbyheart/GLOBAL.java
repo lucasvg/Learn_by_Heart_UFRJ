@@ -7,23 +7,39 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 
+import com.learnbyheart.greenDao.gen.bean.Language;
+
 public class GLOBAL {
+	public static final String DB_NAME = "db_learnbyheart";
+	public static final String TOKEN = "|";
 	public static final String MyPREFERENCES = "LearnbyHeartSharedPreferences" ;
-	public static final String userLoggedSession = "userLoggedSession";
-	public static final String userLoggedId = "userLoggedId";
+	public static final String USER_LOGGED_SESSION = "userLoggedSession";
+	public static final String USER_LOGGED_ID = "userLoggedId";
 	
 	public static final String hasOpenedLoginActivity = "hasOpenedLoginActivity";
 	
 //	use ifconfig in linux to get actual ip
-	private static final String ip = "ec2-54-173-106-139.compute-1.amazonaws.com";
+	private static final String IP = "54.173.106.139";
 	
 	public static final String urlLogin(String userLogin, String pwd){
-		return String.format("http://" + ip + "/axis2/services/service/lazyLogin?userLogin=%s&pwd=%s", userLogin, pwd);
+		return String.format("http://" + IP + "/axis2/services/service/lazyLogin?userLogin=%s&pwd=%s", userLogin, pwd);
 	}
 	
-//	use ifconfig in linux to get actual ip
 	public static final String urlSignup(String name, String userLogin, String pwd, String email){
-		return String.format("http://" + ip + "/axis2/services/service/createUser?name=%s&login=%s&password=%s&email=%s", name, userLogin, pwd, email);
+		return String.format("http://" + IP + "/axis2/services/service/createUser?name=%s&login=%s&password=%s&email=%s", name, userLogin, pwd, email);
+	}
+	
+	public static final String urlGetLanguages(String sessionHash){
+		return String.format("http://" + IP + "/axis2/services/service/getLanguages?sessionHash=%s", sessionHash);
+	}
+	
+	public static final Language parseLanguageWithToken(String languageString){
+		Language language = new Language();
+		String[] parts = languageString.split("\\|");
+		language.setId(Long.parseLong(parts[0]));
+		language.setDescription(parts[1]);
+		language.setCode(parts[2]);
+		return language;
 	}
 	
 	public static final InputStream OpenHttpConnection(String urlString) throws IOException {

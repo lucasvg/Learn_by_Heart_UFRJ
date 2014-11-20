@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 CREATE TABLE IF NOT EXISTS `language` (
   `_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `description` text NOT NULL,
-  `code` text NOT NULL,
+  `android_code` text NOT NULL,
   PRIMARY KEY (`_id`)
 )
 
@@ -84,3 +84,4 @@ CREATE TABLE IF NOT EXISTS `log_example_notification` (
 )
 
 insert into user_type values(1, 'padrao');
+INSERT INTO `db_learnbyheart`.`language` (`description`, `android_code`) VALUES ('English', 'en'), ('French', 'fr'), ('Portuguese', 'pt'), ('Spanish', 'es');

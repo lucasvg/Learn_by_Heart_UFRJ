@@ -2,8 +2,8 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="312" key="DIALOG_WIDTH"/>
-		<item value="253" key="DIALOG_Y_ORIGIN"/>
-		<item value="1019" key="DIALOG_X_ORIGIN"/>
+		<item value="304" key="DIALOG_Y_ORIGIN"/>
+		<item value="1462" key="DIALOG_X_ORIGIN"/>
 		<item value="437" key="DIALOG_HEIGHT"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
@@ -13,26 +13,26 @@
 		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="32" key="selection"/>
+		<item value="dicionaryDao" key="selection"/>
 		<list key="findhistory">
-			<item value="32"/>
-			<item value="62dp"/>
+			<item value="dicionarioDao"/>
+			<item value="dicionarioList"/>
+			<item value="DevOpenHelper"/>
+			<item value="sin"/>
+			<item value="syn"/>
 			<item value="sincro"/>
-			<item value="MyPREFERENCES"/>
-			<item value="permis"/>
-			<item value="ibDictionary"/>
-			<item value="etNome"/>
-			<item value="dicionario"/>
+			<item value="teste"/>
+			<item value="userLoggedId"/>
 		</list>
 		<list key="replacehistory">
+			<item value="dicionaryDao"/>
+			<item value="dictionaryList"/>
+			<item value="USER_LOGGED_ID"/>
+			<item value="USER_LOGGED_SESSION"/>
+			<item value="userSession"/>
 			<item value="32dp"/>
 			<item value="32"/>
 			<item value="btnLogin"/>
-			<item value="etName"/>
-			<item value="dictionary"/>
-			<item value="language"/>
-			<item value="Language"/>
-			<item value="dictionery"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">

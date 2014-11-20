@@ -12,8 +12,9 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.learnbyheart.GLOBAL;
+import com.learnbyheart.GenericUtilFunctions;
 import com.learnbyheart.R;
-import com.learnbyheart.UtilFunctions;
 import com.learnbyheart.greenDao.gen.bean.Dictionary;
 import com.learnbyheart.greenDao.gen.dao.DaoMaster;
 import com.learnbyheart.greenDao.gen.dao.DaoMaster.DevOpenHelper;
@@ -31,6 +32,7 @@ public class DictionaryActivity extends ListActivity{
 	private DaoMaster daoMaster;
 	private DaoSession daoSession;
 	private DictionaryDao dictionaryDao;
+	private GenericUtilFunctions<Dictionary> util;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +40,14 @@ public class DictionaryActivity extends ListActivity{
         setContentView(R.layout.listview);
         
         // getting dictionary from DB
-        DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "learnbyheart-db", null);
+        DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, GLOBAL.DB_NAME, null);
 		db = helper.getWritableDatabase();
 		daoMaster = new DaoMaster(db);
 		daoSession = daoMaster.newSession();
 		dictionaryDao = daoSession.getDictionaryDao();
 		try {
 			dictionaryList = dictionaryDao.loadAll();
-			UtilFunctions<Dictionary> util = new UtilFunctions<Dictionary>();
+			util = new GenericUtilFunctions<Dictionary>();
 			dictionaryNameList = util.getListToString(dictionaryList);
 		} catch (Exception e) {
 			Log.e("dictionaries loading", e.toString());
@@ -80,5 +82,25 @@ public class DictionaryActivity extends ListActivity{
 		db.close();
 		super.onDestroy();
 	}
+	
+	@Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == RESULT_OK) { // request code for
+			try {
+				dictionaryList = dictionaryDao.loadAll();
+				dictionaryNameList = util.getListToString(dictionaryList);
+				
+				// populating ListView
+				l = getListView();
+				ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dictionaryNameList);
+				l.setAdapter(adapter);
+				// end populating ListView
+				
+			} catch (Exception e) {
+				Log.e("ActivityDicionaries", e.toString());
+			}
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
 }
