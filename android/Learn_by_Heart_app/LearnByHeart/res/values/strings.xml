@@ -40,6 +40,8 @@
 	<!-- from Add Edit Word Activity -->
 	<string name="toast_add_edit_term_activity_no_word">Write a word</string>
 	
+	<string name="toast_add_edit_example_activity_no_example">Enter a example</string>
+	
     <!-- from Dictionary Activity -->
     <string name="tv_dictionary_activity_title">Dictionary</string>
     <string name="tv_dictionary_activity_legend">Enter the description:</string>
@@ -68,6 +70,8 @@
 	<string name="signup_activity_hint_password_repeat">Retype your password</string>
 	<string name="signup_activity_hint_email">Email</string>
 	<string name="signup_activity_btn_signup">Sign Up</string>
+	
+	<string name="toast_add_edit_meaning_activity_no_meaning">Enter a meaning</string>
     
     <!-- from Alarm Settings Activity -->
     <string name="notifications_enable_disable_title">Notifications</string>

@@ -1,0 +1,5 @@
+package com.learnbyheart;
+
+public interface DefaultEntityInterface {
+	public abstract String getName();
+}

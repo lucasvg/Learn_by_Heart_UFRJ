@@ -3,6 +3,9 @@ package com.learnbyheart.greenDao.gen.bean;
 
 import java.util.List;
 
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import com.learnbyheart.greenDao.gen.dao.DaoSession;
 import com.learnbyheart.greenDao.gen.dao.ExampleDao;
 import com.learnbyheart.greenDao.gen.dao.LogExampleNotificationDao;
@@ -154,6 +157,36 @@ public class Example {
     @Override
     public String toString() {
     	return this.example;
+    }
+    
+    public String toXMLString(){
+    	String str= "";
+    	str += "<example>";
+    	str += "<id>" + this.id + "</id>";
+    	str += "<name>" + this.example + "</name>";
+    	str += "<meaningId>" + this.meaningId + "</meaningId>";
+    	str += "</example>";
+    	return str;
+    }
+    
+    /**
+     * @param node
+     * @return
+     * @throws NullPointerException
+     * <example><id>1</id><name>example</name><meaningId>1</meaningId></example>
+     */
+    public static Example fromXMLString(Node node) throws NullPointerException{
+    	if(node == null)
+    		return null;
+    	NodeList nodeList = node.getChildNodes();
+    	if(nodeList == null || nodeList.getLength() == 0)
+    		return null;
+    	
+    	return new Example(
+    			Long.valueOf(nodeList.item(0).getTextContent()),
+    			nodeList.item(1).getTextContent(),
+    			Long.valueOf(nodeList.item(2).getTextContent())
+    			);
     }
 
 }

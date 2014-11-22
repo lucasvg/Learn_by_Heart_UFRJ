@@ -1,7 +1,11 @@
 package com.learnbyheart.greenDao.gen.bean;
 
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.learnbyheart.greenDao.gen.dao.DaoSession;
 import com.learnbyheart.greenDao.gen.dao.DictionaryDao;
@@ -156,4 +160,56 @@ public class Word {
     	return this.word;
     }
 
+    public String toXMLString(){
+    	String str= "";
+    	str += "<word>";
+    	str += "<id>" + this.id + "</id>";
+    	str += "<name>" + this.word + "</name>";
+    	str += "<dictionaryId>" + this.dictionaryId + "</dictionaryId>";
+    	
+    	
+    	str += "<meanings>";
+    	// meanings
+    	getMeanings();
+    	for (Meaning meaning: meanings) {
+				str += meaning.toXMLString();
+		}
+    	str += "</meanings>";
+    	
+    	str += "</word>";
+    	return str;
+    }
+
+	/**
+	 * @param node
+	 * @return
+	 * @throws NullPointerException
+	 * <word><id>4</id><name>ss</name><dictionaryId>1</dictionaryId><meanings><meaning><id>1</id><name>sdasd</name><wordId>4</wordId><examples><example><id>1</id><name>example</name><meaningId>1</meaningId></example></examples></meaning><meaning><id>2</id><name>other meaning</name><wordId>4</wordId><examples></examples></meaning></meanings></word>
+	 */
+	public static Word fromXMLString(Node node) throws NullPointerException{
+    	if(node == null)
+    		return null;
+    	NodeList nodeList = node.getChildNodes();
+    	if(nodeList == null || nodeList.getLength() == 0)
+    		return null;
+    	
+    	Word word = new Word(
+    			Long.valueOf(nodeList.item(0).getTextContent()),
+    			nodeList.item(1).getTextContent(),
+    			Long.valueOf(nodeList.item(2).getTextContent())
+    			);
+    	
+    	
+    	if(nodeList.item(3).getTextContent() != null){
+    		List<Meaning> meanings = new ArrayList<Meaning>();
+    		NodeList meaningNodes = nodeList.item(3).getChildNodes();
+    		for(int i = 0; i < meaningNodes.getLength(); i++){
+    			meanings.add(Meaning.fromXMLString(meaningNodes.item(i)));
+    		}
+    		word.meanings = meanings;
+    	}    	
+    	
+    	return word;
+    }
+	
 }

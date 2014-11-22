@@ -4,7 +4,6 @@
 <fullyQualifiedTypeName name="de.greenrobot.daogenerator.Property"/>
 <fullyQualifiedTypeName name="de.greenrobot.daogenerator.Entity"/>
 <fullyQualifiedTypeName name="android.app.ListActivity"/>
-<fullyQualifiedTypeName name="android.view.View"/>
 <fullyQualifiedTypeName name="android.view.LayoutInflater"/>
 <fullyQualifiedTypeName name="android.view.ViewGroup"/>
 <fullyQualifiedTypeName name="android.support.v7.appcompat.R"/>
@@ -48,4 +47,7 @@
 <fullyQualifiedTypeName name="com.learnbyheart.GenericUtilFunctions"/>
 <fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.dao.LanguageDao"/>
 <fullyQualifiedTypeName name="com.learnbyheart.GLOBAL"/>
+<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.bean.Meaning"/>
+<fullyQualifiedTypeName name="android.view.View"/>
+<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.bean.Example"/>
 </qualifiedTypeNameHistroy>

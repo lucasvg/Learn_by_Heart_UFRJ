@@ -1,7 +1,11 @@
 package com.learnbyheart.greenDao.gen.bean;
 
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.learnbyheart.greenDao.gen.dao.DaoSession;
 import com.learnbyheart.greenDao.gen.dao.ExampleDao;
@@ -156,4 +160,56 @@ public class Meaning {
     	return this.meaning;
     }
 
+    public String toXMLString(){
+    	String str= "";
+    	str += "<meaning>";
+    	str += "<id>" + this.id + "</id>";
+    	str += "<name>" + this.meaning + "</name>";
+    	str += "<wordId>" + this.wordId + "</wordId>";
+    	
+//    	examples
+    	
+    	str += "<examples>";
+    	getExamples();
+    	for (Example example: examples) {
+				str += example.toXMLString();
+		}
+    	str += "</examples>";
+    	
+    	str += "</meaning>";
+    	return str;
+    }
+    
+    /**
+     * @param node
+     * @return
+     * @throws NullPointerException
+     * <meaning><id>1</id><name>sdasd</name><wordId>4</wordId><examples><example><id>1</id><name>example</name><meaningId>1</meaningId></example></examples></meaning>
+     */
+    public static Meaning fromXMLString(Node node) throws NullPointerException{
+    	if(node == null)
+    		return null;
+    	NodeList nodeList = node.getChildNodes();
+    	if(nodeList == null || nodeList.getLength() == 0)
+    		return null;
+    	
+    	Meaning meaning = new Meaning(
+    			Long.valueOf(nodeList.item(0).getTextContent()),
+    			nodeList.item(1).getTextContent(),
+    			Long.valueOf(nodeList.item(2).getTextContent())
+    			);
+    	
+    	
+    	if(nodeList.item(3).getTextContent() != null){
+    		List<Example> examples = new ArrayList<Example>();
+    		NodeList exampleNodes = nodeList.item(3).getChildNodes();
+    		for(int i = 0; i < exampleNodes.getLength(); i++){
+    			examples.add(Example.fromXMLString(exampleNodes.item(i)));
+    		}
+    		meaning.examples = examples;
+    	}    	
+    	
+    	return meaning;
+    }
+    
 }

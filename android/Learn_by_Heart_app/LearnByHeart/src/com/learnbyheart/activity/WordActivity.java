@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -40,6 +41,8 @@ public class WordActivity extends ListActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listview);
+        
+        setTitle("Words");
         
         // getting dictionary from DB
         DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, GLOBAL.DB_NAME, null);
@@ -113,10 +116,12 @@ public class WordActivity extends ListActivity{
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-//	@Override
-//	protected void onListItemClick(ListView l, View v, int position, long id) {
-//		Toast.makeText(getApplicationContext(), dictionaryList.get(position).getName(), Toast.LENGTH_LONG).show();
-//		super.onListItemClick(l, v, position, id);
-//	}
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		Intent i = new Intent("android.intent.action.meaning");
+		i.putExtra(GLOBAL.wordId, wordList.get(position).getId());
+		startActivity(i);
+		super.onListItemClick(l, v, position, id);
+	}
 
 }

@@ -1001,7 +1001,7 @@ containing a value of this type.
         public static final int terms_icon=0x7f02005d;
     }
     public static final class id {
-        public static final int action_addTerm=0x7f060054;
+        public static final int action_addTerm=0x7f060056;
         public static final int action_bar=0x7f06001c;
         public static final int action_bar_activity_content=0x7f060015;
         public static final int action_bar_container=0x7f06001b;
@@ -1010,33 +1010,35 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f060023;
         public static final int action_bar_title=0x7f060022;
         public static final int action_context_bar=0x7f06001d;
-        public static final int action_logout=0x7f06004f;
+        public static final int action_logout=0x7f060051;
         public static final int action_menu_divider=0x7f060016;
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
-        public static final int action_searchTerm=0x7f060053;
-        public static final int action_synchronize=0x7f06004e;
+        public static final int action_searchTerm=0x7f060055;
+        public static final int action_synchronize=0x7f060050;
         public static final int activity_add_edit_dictionary_et_dictionary_name=0x7f06003c;
         public static final int activity_add_edit_dictionary_sp_dictionary_language=0x7f06003e;
         public static final int activity_add_edit_dictionary_tb_dictionary_is_public=0x7f060040;
         public static final int activity_add_edit_dictionary_tv_dictionary_is_public=0x7f06003f;
         public static final int activity_add_edit_dictionary_tv_dictionary_language=0x7f06003d;
-        public static final int activity_add_edit_word_et_word_name=0x7f060041;
+        public static final int activity_add_edit_example_et_example=0x7f060041;
+        public static final int activity_add_edit_meaning_et_meaning=0x7f060042;
+        public static final int activity_add_edit_word_et_word_name=0x7f060043;
         public static final int activity_chooser_view_content=0x7f060025;
-        public static final int activity_login_bLogin=0x7f060044;
-        public static final int activity_login_bSignUp=0x7f060045;
-        public static final int activity_login_edUserLogin=0x7f060042;
-        public static final int activity_login_edUserPwd=0x7f060043;
-        public static final int activity_signup_bSignUp=0x7f06004d;
-        public static final int activity_signup_edUserEmail=0x7f06004a;
-        public static final int activity_signup_edUserName=0x7f060049;
-        public static final int activity_signup_edUserPwd=0x7f06004b;
-        public static final int activity_signup_edUserPwdRepeat=0x7f06004c;
+        public static final int activity_login_bLogin=0x7f060046;
+        public static final int activity_login_bSignUp=0x7f060047;
+        public static final int activity_login_edUserLogin=0x7f060044;
+        public static final int activity_login_edUserPwd=0x7f060045;
+        public static final int activity_signup_bSignUp=0x7f06004f;
+        public static final int activity_signup_edUserEmail=0x7f06004c;
+        public static final int activity_signup_edUserName=0x7f06004b;
+        public static final int activity_signup_edUserPwd=0x7f06004d;
+        public static final int activity_signup_edUserPwdRepeat=0x7f06004e;
         public static final int always=0x7f06000b;
         public static final int beginning=0x7f060011;
-        public static final int btnActionBar_cancel=0x7f060051;
-        public static final int btnActionBar_create=0x7f060050;
-        public static final int btnActionBar_save=0x7f060052;
+        public static final int btnActionBar_cancel=0x7f060053;
+        public static final int btnActionBar_create=0x7f060052;
+        public static final int btnActionBar_save=0x7f060054;
         public static final int checkbox=0x7f06002d;
         public static final int collapseActionView=0x7f06000d;
         public static final int default_activity_button=0x7f060028;
@@ -1049,13 +1051,13 @@ containing a value of this type.
         public static final int expanded_menu=0x7f06002c;
         public static final int home=0x7f060014;
         public static final int homeAsUp=0x7f060005;
-        public static final int ibFeedback=0x7f060048;
-        public static final int ibOpenActivityAlarms=0x7f060047;
-        public static final int ibOpenActivityDictionary=0x7f060046;
+        public static final int ibFeedback=0x7f06004a;
+        public static final int ibOpenActivityAlarms=0x7f060049;
+        public static final int ibOpenActivityDictionary=0x7f060048;
         public static final int icon=0x7f06002a;
         public static final int ifRoom=0x7f06000a;
         public static final int image=0x7f060027;
-        public static final int itemTextToSpeech=0x7f060055;
+        public static final int itemTextToSpeech=0x7f060057;
         public static final int listMode=0x7f060001;
         public static final int list_item=0x7f060029;
         public static final int middle=0x7f060012;
@@ -1138,12 +1140,14 @@ containing a value of this type.
         public static final int abc_search_dropdown_item_icons_2line=0x7f030015;
         public static final int abc_search_view=0x7f030016;
         public static final int activity_add_edit_dictionary=0x7f030017;
-        public static final int activity_add_edit_word=0x7f030018;
-        public static final int activity_login=0x7f030019;
-        public static final int activity_main=0x7f03001a;
-        public static final int activity_signup=0x7f03001b;
-        public static final int listview=0x7f03001c;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
+        public static final int activity_add_edit_example=0x7f030018;
+        public static final int activity_add_edit_meaning=0x7f030019;
+        public static final int activity_add_edit_word=0x7f03001a;
+        public static final int activity_login=0x7f03001b;
+        public static final int activity_main=0x7f03001c;
+        public static final int activity_signup=0x7f03001d;
+        public static final int listview=0x7f03001e;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001f;
     }
     public static final class menu {
         public static final int main=0x7f0e0000;
@@ -1199,28 +1203,28 @@ containing a value of this type.
         public static final int action_logout=0x7f0b0017;
         public static final int action_settings=0x7f0b0016;
         public static final int action_synchronize=0x7f0b0018;
-        public static final int activity_adicionar_editar_termo_et_hint_exemplo=0x7f0b0048;
-        public static final int activity_adicionar_editar_termo_et_hint_palavra=0x7f0b0046;
-        public static final int activity_adicionar_editar_termo_et_hint_significado=0x7f0b0047;
-        public static final int activity_adicionar_editar_termo_title=0x7f0b0045;
+        public static final int activity_adicionar_editar_termo_et_hint_exemplo=0x7f0b004a;
+        public static final int activity_adicionar_editar_termo_et_hint_palavra=0x7f0b0048;
+        public static final int activity_adicionar_editar_termo_et_hint_significado=0x7f0b0049;
+        public static final int activity_adicionar_editar_termo_title=0x7f0b0047;
         /**  from Main Activity 
  from Main Activity 
          */
         public static final int app_name=0x7f0b000d;
-        public static final int btnActionBar_Cancel=0x7f0b002e;
-        public static final int btnActionBar_create=0x7f0b002c;
-        public static final int btnActionBar_save=0x7f0b002d;
+        public static final int btnActionBar_Cancel=0x7f0b002f;
+        public static final int btnActionBar_create=0x7f0b002d;
+        public static final int btnActionBar_save=0x7f0b002e;
         public static final int btnFeedback=0x7f0b0012;
         public static final int btnOpenActivityAlarms=0x7f0b0011;
         public static final int btnOpenActivityDictionaries=0x7f0b0010;
         public static final int btnOpenActivityTerms=0x7f0b000f;
-        public static final int btn_correct_activity_display=0x7f0b0032;
-        public static final int btn_create=0x7f0b0044;
-        public static final int btn_dictionary_activity_add_dictionary=0x7f0b002a;
-        public static final int btn_dictionary_activity_cancel=0x7f0b0029;
-        public static final int btn_dictionary_activity_no_name=0x7f0b002b;
-        public static final int btn_dictionary_activity_save=0x7f0b0028;
-        public static final int btn_wrong_activity_display=0x7f0b0033;
+        public static final int btn_correct_activity_display=0x7f0b0033;
+        public static final int btn_create=0x7f0b0046;
+        public static final int btn_dictionary_activity_add_dictionary=0x7f0b002b;
+        public static final int btn_dictionary_activity_cancel=0x7f0b002a;
+        public static final int btn_dictionary_activity_no_name=0x7f0b002c;
+        public static final int btn_dictionary_activity_save=0x7f0b0029;
+        public static final int btn_wrong_activity_display=0x7f0b0034;
         /**  on ActivityTerms and ActivityDictionaries 
  on ActivityTerms and ActivityDictionaries 
          */
@@ -1232,42 +1236,44 @@ containing a value of this type.
   only on ActivityDictionaries 
          */
         public static final int deleteConfirmWarning=0x7f0b0024;
-        public static final int dictionaries_to_be_questioned=0x7f0b0040;
-        public static final int dictionaries_to_be_questioned_description=0x7f0b0041;
-        public static final int dictionary_language=0x7f0b0043;
+        public static final int dictionaries_to_be_questioned=0x7f0b0042;
+        public static final int dictionaries_to_be_questioned_description=0x7f0b0043;
+        public static final int dictionary_language=0x7f0b0045;
         /**  from activity_add_edit_dictionary.xml 
  from activity_add_edit_dictionary.xml 
          */
-        public static final int dictionary_name=0x7f0b0042;
+        public static final int dictionary_name=0x7f0b0044;
         public static final int etHintComment=0x7f0b001f;
         public static final int etHintExample=0x7f0b001e;
         public static final int etHintMeaning=0x7f0b001d;
         public static final int etHintWord=0x7f0b001c;
-        public static final int frequence_of_notifications=0x7f0b003e;
-        public static final int frequence_of_notifications_description=0x7f0b003f;
-        public static final int message_notification=0x7f0b002f;
-        public static final int notifications_disabled=0x7f0b003d;
+        public static final int frequence_of_notifications=0x7f0b0040;
+        public static final int frequence_of_notifications_description=0x7f0b0041;
+        public static final int message_notification=0x7f0b0030;
+        public static final int notifications_disabled=0x7f0b003f;
         /**  from Alarm Settings Activity 
  from Reminder Settings Activity 
          */
-        public static final int notifications_enable_disable_title=0x7f0b003b;
-        public static final int notifications_enabled=0x7f0b003c;
+        public static final int notifications_enable_disable_title=0x7f0b003d;
+        public static final int notifications_enabled=0x7f0b003e;
         public static final int send_feedback_fail=0x7f0b0013;
-        public static final int signup_activity_btn_signup=0x7f0b003a;
-        public static final int signup_activity_hint_email=0x7f0b0039;
+        public static final int signup_activity_btn_signup=0x7f0b003b;
+        public static final int signup_activity_hint_email=0x7f0b003a;
         /**  from Signup Activity 
  from Signup Activity 
          */
-        public static final int signup_activity_hint_name=0x7f0b0036;
-        public static final int signup_activity_hint_password=0x7f0b0037;
-        public static final int signup_activity_hint_password_repeat=0x7f0b0038;
+        public static final int signup_activity_hint_name=0x7f0b0037;
+        public static final int signup_activity_hint_password=0x7f0b0038;
+        public static final int signup_activity_hint_password_repeat=0x7f0b0039;
+        public static final int toast_add_edit_example_activity_no_example=0x7f0b0026;
+        public static final int toast_add_edit_meaning_activity_no_meaning=0x7f0b003c;
         /**  from Add Edit Word Activity 
  from Add Edit Term Activity 
          */
         public static final int toast_add_edit_term_activity_no_word=0x7f0b0025;
-        public static final int toast_language_not_supported=0x7f0b0034;
+        public static final int toast_language_not_supported=0x7f0b0035;
         public static final int toast_main_activity_no_dictionaries=0x7f0b000e;
-        public static final int toast_silence=0x7f0b0035;
+        public static final int toast_silence=0x7f0b0036;
         /**      <string name="en_btnOpenActivityAccounts">Account</string> 
      <string name="en_btnOpenActivityShare">Share This</string> 
      <string name="en_btnOpenActivityAbout">About</string> 
@@ -1280,17 +1286,17 @@ containing a value of this type.
  from Term Activity 
          */
         public static final int tv_add_term=0x7f0b0014;
-        public static final int tv_dictionary_activity_legend=0x7f0b0027;
+        public static final int tv_dictionary_activity_legend=0x7f0b0028;
         /**  from Dictionary Activity 
  from Dictionary Activity 
          */
-        public static final int tv_dictionary_activity_title=0x7f0b0026;
+        public static final int tv_dictionary_activity_title=0x7f0b0027;
         public static final int tv_edit_term=0x7f0b0015;
-        public static final int tv_meaning_activity_display=0x7f0b0031;
+        public static final int tv_meaning_activity_display=0x7f0b0032;
         /**  from Display Term Activity 
  from Display Term Activity 
          */
-        public static final int tv_word_activity_display=0x7f0b0030;
+        public static final int tv_word_activity_display=0x7f0b0031;
     }
     public static final class style {
         public static final int ActionBar=0x7f0c0089;

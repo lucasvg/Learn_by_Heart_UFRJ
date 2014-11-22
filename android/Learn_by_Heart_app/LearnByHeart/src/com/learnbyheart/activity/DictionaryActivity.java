@@ -11,10 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemLongClickListener;
 
 import com.learnbyheart.GLOBAL;
 import com.learnbyheart.GenericUtilFunctions;
@@ -43,6 +42,8 @@ public class DictionaryActivity extends ListActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listview);
         
+        setTitle("Dictionaries");
+        
         // getting dictionary from DB
         DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, GLOBAL.DB_NAME, null);
 		db = helper.getWritableDatabase();
@@ -65,8 +66,32 @@ public class DictionaryActivity extends ListActivity{
 		this.getListView().setLongClickable(true);
 		this.getListView().setOnItemLongClickListener(new OnItemLongClickListener() {
 		    public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
-		    	Toast.makeText(getApplicationContext(), dictionaryList.get(position).getName(), Toast.LENGTH_LONG).show();
-		        return true;
+//		    	Log.v("dic xml",  dictionaryList.get(position).toXMLString());
+		    	
+//		    	String str = "<dictionary><id>1</id><name>MyDic</name><isPublic>true</isPublic><userId>1</userId><languageId>9</languageId><words></words></dictionary>";
+//		    	
+//				try {
+//					DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+//					DocumentBuilder builder = dbf.newDocumentBuilder();;
+//					Document mainDoc = builder.parse( new InputSource( new StringReader( str ) ) ); 
+//					NodeList nodeList = mainDoc.getElementsByTagName("dictionary");
+//					Dictionary dictionary = Dictionary.fromXMLString(nodeList.item(0));
+//					
+//					Log.v("ss", dictionary.getWords().get(0).getMeanings().get(0).getExamples().get(0).getExample());
+//				} catch (ParserConfigurationException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (SAXException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (Exception e) {
+//					Log.e("my", e.toString());
+//				}
+		    	
+		    	return true;
 		    }
 		});
 		
