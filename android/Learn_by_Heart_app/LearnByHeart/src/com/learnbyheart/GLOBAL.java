@@ -15,6 +15,7 @@ public class GLOBAL {
 	public static final String MyPREFERENCES = "LearnbyHeartSharedPreferences" ;
 	public static final String USER_LOGGED_SESSION = "userLoggedSession";
 	public static final String USER_LOGGED_ID = "userLoggedId";
+	public static final String dictionaryId = "dictionary_id";
 	
 	public static final String hasOpenedLoginActivity = "hasOpenedLoginActivity";
 	

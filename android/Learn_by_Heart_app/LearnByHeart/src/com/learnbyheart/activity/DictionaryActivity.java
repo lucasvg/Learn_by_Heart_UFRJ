@@ -9,8 +9,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 import com.learnbyheart.GLOBAL;
 import com.learnbyheart.GenericUtilFunctions;
@@ -57,6 +61,15 @@ public class DictionaryActivity extends ListActivity{
 		l = getListView();
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dictionaryNameList);
 		l.setAdapter(adapter);
+		
+		this.getListView().setLongClickable(true);
+		this.getListView().setOnItemLongClickListener(new OnItemLongClickListener() {
+		    public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
+		    	Toast.makeText(getApplicationContext(), dictionaryList.get(position).getName(), Toast.LENGTH_LONG).show();
+		        return true;
+		    }
+		});
+		
     }
 
     @Override
@@ -102,5 +115,13 @@ public class DictionaryActivity extends ListActivity{
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		Intent i = new Intent("android.intent.action.word");
+		i.putExtra(GLOBAL.dictionaryId, dictionaryList.get(position).getId());
+		startActivity(i);
+		super.onListItemClick(l, v, position, id);
+	}
 
 }

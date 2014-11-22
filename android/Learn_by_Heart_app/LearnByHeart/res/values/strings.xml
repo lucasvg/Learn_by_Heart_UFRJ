@@ -37,7 +37,7 @@
     <!--  only on ActivityDictionaries -->
    	<string name="deleteConfirmWarning"> \n\n(This will permanently delete all terms of this dictioanry!)</string>
    
-	<!-- from Add Edit Term Activity -->
+	<!-- from Add Edit Word Activity -->
 	<string name="toast_add_edit_term_activity_no_word">Write a word</string>
 	
     <!-- from Dictionary Activity -->

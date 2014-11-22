@@ -128,9 +128,14 @@ android.view.View.OnClickListener {
 	@Override
 	public void onClick(View v) {
 		int id = v.getId();
-		if (id == R.id.ibOpenActivityDictionary) {
+		switch (id) {
+		case R.id.ibOpenActivityDictionary:
 			Intent i = new Intent("android.intent.action.dictionary");
 			startActivity(i);
+			break;
+
+		default:
+			break;
 		}
 	}
 	
