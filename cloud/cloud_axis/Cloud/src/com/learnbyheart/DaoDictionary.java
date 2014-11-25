@@ -53,10 +53,10 @@ public class DaoUser {
 //                    ret = Global.NOT_OK + "user's properties must not contain '" + Global.token + "'";
                     ret = null;
                 }if ((name.equals("")) || (login.equals("")) || (password.equals("")) || (email.equals(""))) {
-                    ret = Global.NOT_OK + "user's properties must not be empty'";
+//                    ret = Global.NOT_OK + "user's properties must not be empty'";
                     ret = null;
                 }if ((name.isEmpty()) || (login.isEmpty()) || (password.isEmpty()) || (email.isEmpty())) {
-                    ret = Global.NOT_OK + "user's properties must not be empty'";
+//                    ret = Global.NOT_OK + "user's properties must not be empty'";
                     ret = null;
                 }  
                 
