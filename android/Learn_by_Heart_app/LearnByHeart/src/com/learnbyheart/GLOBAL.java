@@ -22,7 +22,7 @@ public class GLOBAL {
 	public static final String hasOpenedLoginActivity = "hasOpenedLoginActivity";
 	
 //	use ifconfig in linux to get actual ip
-	private static final String IP = "54.173.106.139";
+	private static final String IP = "10.0.0.149:8080";
 	
 	public static final String urlLogin(String userLogin, String pwd){
 		return String.format("http://" + IP + "/axis2/services/service/lazyLogin?userLogin=%s&pwd=%s", userLogin, pwd);
@@ -34,6 +34,14 @@ public class GLOBAL {
 	
 	public static final String urlGetLanguages(String sessionHash){
 		return String.format("http://" + IP + "/axis2/services/service/getLanguages?sessionHash=%s", sessionHash);
+	}
+	
+	public static final String urlSaveData(String sessionHash, String data){
+		return String.format("http://" + IP + "/axis2/services/service/saveData?sessionHash=%s&data=%s", sessionHash, data);
+	}
+	
+	public static final String urlRetrieveData(String sessionHash){
+		return String.format("http://" + IP + "/axis2/services/service/retrieveData?sessionHash=%s", sessionHash);
 	}
 	
 	public static final Language parseLanguageWithToken(String languageString){

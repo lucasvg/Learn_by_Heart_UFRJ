@@ -6,8 +6,23 @@
 package com.learnbyheart;
 
 import static com.learnbyheart.Global.OK;
+import static com.learnbyheart.Global.log;
+import com.learnbyheart.bean.Dictionary;
 import com.learnbyheart.bean.User;
+import java.io.IOException;
+import java.io.StringReader;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -16,6 +31,9 @@ import java.util.List;
 public class DouaController {
 
     private static final DOUA doua = new DOUA();
+    
+    // 41 - 4 is the default resource number. The X resource would be 4X
+    private static final int RESOURCE_ID_DEFAULT = 41;
 
     
         // ============== SBVB CODE ====================
@@ -29,10 +47,8 @@ public class DouaController {
 //    }
     // ============== end SBVB CODE ====================
 
-    public static String[] getLanguages(String sessionHash) {
-        // 41 - 4 is the default resource number. The X resource would be 4X
-        int thisResourceID = 41;
-        if (doua.usecaseAuthorized(sessionHash, thisResourceID)) {            
+    public static String[] getLanguages(String sessionHash) throws ClassNotFoundException, SQLException {
+        if (doua.usecaseAuthorized(sessionHash, RESOURCE_ID_DEFAULT)) {            
             return DaoLanguage.readLanguages();
         } else {
             System.out.println("notlooged");
@@ -104,6 +120,48 @@ public class DouaController {
         // ============== end SBVB CODE ====================
 
         return OK;
+    }
+
+    static String saveData(String sessionHash, String data) throws ClassNotFoundException, SQLException {
+        if (doua.usecaseAuthorized(sessionHash, RESOURCE_ID_DEFAULT)) {            
+            int userId = doua.getUserId(sessionHash, RESOURCE_ID_DEFAULT);
+            
+            List<Dictionary> dictionaries;
+            
+            try{
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = dbf.newDocumentBuilder();;
+            Document mainDoc = builder.parse( new InputSource( new StringReader( data ) ) ); 
+            NodeList nodeList = mainDoc.getElementsByTagName("dictionary");
+            dictionaries = new ArrayList<Dictionary>();
+            dictionaries = Dictionary.fromXMLString(nodeList);
+            }catch(ParserConfigurationException ex){
+                return ex.toString();
+            } catch (SAXException ex) {
+                return ex.toString();
+            } catch (IOException ex) {
+                return ex.toString();
+            }
+            
+            for (Dictionary dictionary : dictionaries) {
+                log.log(Level.INFO, DaoDictionary.createDictionary(dictionary.getName(), dictionary.isIsPublic(), dictionary.getUserId(), dictionary.getLanguageId()));
+            }
+            
+            return "done";
+//            return DaoLanguage.readLanguages();
+        } else {
+            System.out.println("notlooged");
+            return null;
+        }
+    }
+    
+    static String retrieveData(String sessionHash) throws ClassNotFoundException, SQLException {
+        if (doua.usecaseAuthorized(sessionHash, RESOURCE_ID_DEFAULT)) {            
+            return DaoDictionary.readDictionary();
+        } else {
+            System.out.println("notlooged");
+            return null;
+        }
     }
 
 }

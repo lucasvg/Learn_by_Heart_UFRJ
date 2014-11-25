@@ -13,16 +13,16 @@
 		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="example" key="selection"/>
+		<item value="trying to sendData error" key="selection"/>
 		<list key="findhistory">
+			<item value="trying to sendData error"/>
+			<item value="nodeList.item(0).getTextContent())"/>
 			<item value="meaning"/>
 			<item value="Meaning"/>
 			<item value="word"/>
 			<item value="Word"/>
 			<item value="dictionary"/>
 			<item value="Dictionary"/>
-			<item value="dicionarioDao"/>
-			<item value="dicionarioList"/>
 		</list>
 		<list key="replacehistory">
 			<item value="example"/>

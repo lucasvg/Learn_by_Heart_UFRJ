@@ -263,6 +263,17 @@ public class Dictionary {
     	}    	
     	
     	return dictionary;
-    }
+    }    
     
+    public static List<Dictionary> fromXMLString(NodeList nodeList) throws NullPointerException{
+        if(nodeList == null)
+            return null;
+        
+        List<Dictionary> dicList = new ArrayList<Dictionary>();
+        for(int i = 0; i < nodeList.getLength(); i++){
+            dicList.add(fromXMLString(nodeList.item(i)));
+        }
+        
+        return dicList;        
+    }
 }

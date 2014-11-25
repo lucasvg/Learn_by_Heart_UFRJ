@@ -210,7 +210,6 @@ public class DOUA {
     }
 
     public class User extends ID {
-
         public String name;
         public String pwd;
         public String pwdHash;
@@ -573,6 +572,21 @@ public class DOUA {
                 for (int rid : s.authorizedResources) {
                     if (rid == resourseID) {
                         ret = true;
+                        break;
+                    }
+                }
+            }
+        }
+        return ret;
+    }
+    
+    public int getUserId(String sessionHash, int resourseID) {
+        int ret = -1;
+        for (Session s : sessionContainer) {
+            if (s.sessionHash.equals(sessionHash)) {
+                for (int rid : s.authorizedResources) {
+                    if (rid == resourseID) {
+                        ret = s.userFK;
                         break;
                     }
                 }

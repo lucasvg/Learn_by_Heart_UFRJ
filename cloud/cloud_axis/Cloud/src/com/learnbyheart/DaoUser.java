@@ -39,7 +39,7 @@ public class DaoUser {
      * @param author - author name
      * @return - primary key of created author
      */
-    static String createUser(final String name, final String login, final String password, final String email, final Long userType) {
+    static String createUser(final String name, final String login, final String password, final String email, final Long userType) throws ClassNotFoundException, SQLException {
 
         Database_Base dbb = new Database_Base() {
             @Override
@@ -133,7 +133,7 @@ public class DaoUser {
      *
      * @return an array where each line is the author_id;author_name
      */
-    static String[] readUser() {
+    static String[] readUser() throws ClassNotFoundException, SQLException {
         Database_Base dbb = new Database_Base() {
             @Override
             void evaluate() throws SQLException {
@@ -146,6 +146,7 @@ public class DaoUser {
                 rs.next();
                 int rowCount = 0;
                 // for each line of ResultSet
+                
                 for (int i = 0; i < nLines; i++) {
                     String data = rs.getString("_id") + Global.token;
                     data += rs.getString("name");
@@ -165,7 +166,7 @@ public class DaoUser {
      * @param newName
      * @return
      */
-    static String updateAuthor(final int author_id, final String newName) {
+    static String updateAuthor(final int author_id, final String newName) throws ClassNotFoundException, SQLException {
         Database_Base dbb = new Database_Base() {
             @Override
             void evaluate() throws SQLException {
@@ -188,7 +189,7 @@ public class DaoUser {
     }
 
     // delete from tb_author where author_id=4;
-    static String deleteAuthor(final int author_id) {
+    static String deleteAuthor(final int author_id) throws ClassNotFoundException, SQLException {
         Database_Base dbb = new Database_Base() {
             @Override
             void evaluate() throws SQLException {

@@ -21,11 +21,10 @@ public abstract class Database_Base{
 
     abstract void evaluate() throws SQLException;
 
-    String returnString() {
+    String returnString() throws ClassNotFoundException, SQLException {
 
         ret = Global.NOT_OK;
 
-        try {
 //            Class.forName(driver);
 //
 //            // for mysql
@@ -40,21 +39,14 @@ public abstract class Database_Base{
             
             con.close();
 
-        } catch (SQLException e) {
-            ret = Global.NOT_OK + "SQLException" + e.toString();
-//            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            ret = Global.NOT_OK + "ClassNotFoundException";
-        }
         return ret;
     }
     
-    String[] returnStringArray() {
+    String[] returnStringArray() throws ClassNotFoundException, SQLException {
 
         retArray = new String[1];
         retArray[0] = Global.NOT_OK;
 
-        try {
 //            Class.forName(driver);
 //
 //            // for mysql
@@ -69,14 +61,6 @@ public abstract class Database_Base{
             
             con.close();
 
-        } catch (SQLException e) {
-            retArray[0] = Global.NOT_OK + "SQLException" + e.toString();
-//            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            retArray[0] = Global.NOT_OK + "ClassNotFoundException";
-        } catch (Exception e) {
-            retArray[0] = Global.NOT_OK + "Unhandled Exception";
-        }
         return retArray;
     }
 

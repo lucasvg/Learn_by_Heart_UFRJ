@@ -38,7 +38,7 @@ public class DaoLanguage {
      *
      * @return an array where each line is the languageId, languageDescription;languageAndroidCode
      */
-    static String[] readLanguages() {
+    static String[] readLanguages() throws ClassNotFoundException, SQLException {
         Database_Base dbb = new Database_Base() {
             @Override
             void evaluate() throws SQLException {

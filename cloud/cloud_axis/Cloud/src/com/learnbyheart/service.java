@@ -4,6 +4,8 @@
  */
 package com.learnbyheart;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author lucas
@@ -31,18 +33,26 @@ public class service {
 //    }
     // ============== end SBVB CODE ====================
     
-    public static String[] readUser(){
+    public static String[] readUser() throws ClassNotFoundException, SQLException{
         return DaoUser.readUser();
     }
     
-    public static String createUser(String name, String login, String password, String email, Long userType){
+    public static String createUser(String name, String login, String password, String email, Long userType) throws ClassNotFoundException, SQLException{
         String result = DaoUser.createUser(name, login, password, email, userType);
         DouaController.loadDouaConfig();
         return result;
     }
     
-    public static String[] getLanguages(String sessionHash){
+    public static String[] getLanguages(String sessionHash) throws ClassNotFoundException, SQLException{
         return DouaController.getLanguages(sessionHash);
+    }
+    
+    public static String saveData(String sessionHash, String data) throws ClassNotFoundException, SQLException{
+        return DouaController.saveData(sessionHash, data);
+    }
+    
+    public static String retrieveData(String sessionHash) throws ClassNotFoundException, SQLException{
+        return DouaController.retrieveData(sessionHash);
     }
     
 }

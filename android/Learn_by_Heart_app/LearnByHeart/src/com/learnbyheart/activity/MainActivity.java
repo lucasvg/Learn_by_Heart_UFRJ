@@ -1,12 +1,15 @@
 package com.learnbyheart.activity;
 
 import java.io.InputStream;
+import java.io.StringReader;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -26,10 +29,12 @@ import android.widget.Toast;
 
 import com.learnbyheart.GLOBAL;
 import com.learnbyheart.R;
+import com.learnbyheart.greenDao.gen.bean.Dictionary;
 import com.learnbyheart.greenDao.gen.dao.DaoMaster;
-import com.learnbyheart.greenDao.gen.dao.DaoSession;
-import com.learnbyheart.greenDao.gen.dao.LanguageDao;
 import com.learnbyheart.greenDao.gen.dao.DaoMaster.DevOpenHelper;
+import com.learnbyheart.greenDao.gen.dao.DaoSession;
+import com.learnbyheart.greenDao.gen.dao.DictionaryDao;
+import com.learnbyheart.greenDao.gen.dao.LanguageDao;
 
 public class MainActivity extends ActionBarActivity implements
 android.view.View.OnClickListener {
@@ -41,11 +46,14 @@ android.view.View.OnClickListener {
 	private ProgressDialog progress;
 	private Document mainDoc;
 	private Boolean languageLoadSuccess = false;
+	private Boolean saveDataLoadSuccess = false;
+	private Boolean retrieveDataLoadSuccess = false;
 	
 	private SQLiteDatabase db;
 	private DaoMaster daoMaster;
 	private DaoSession daoSession;
 	private LanguageDao languageDao;
+	private DictionaryDao dictionaryDao;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +68,7 @@ android.view.View.OnClickListener {
 		daoMaster = new DaoMaster(db);
 		daoSession = daoMaster.newSession();
 		languageDao = daoSession.getLanguageDao();
+		dictionaryDao = daoSession.getDictionaryDao();
 		
     }
 
@@ -98,6 +107,8 @@ android.view.View.OnClickListener {
 				@Override
 				public void run() {
 					synchronizeLanguages();
+					saveData();
+					retrieveData();
 
 					runOnUiThread(new Runnable() {
 						@Override
@@ -106,7 +117,7 @@ android.view.View.OnClickListener {
 							Log.v("taskdone", "==== taskdone");
 
 							// if userSession = null, then httpConnection failed
-							if(!languageLoadSuccess){
+							if(!languageLoadSuccess || !saveDataLoadSuccess || !retrieveDataLoadSuccess){
 								 Toast.makeText(getApplicationContext(), "Failed synchronizing!", Toast.LENGTH_LONG).show();
 							}else{
 								Toast.makeText(getApplicationContext(), "Done synchronizing!", Toast.LENGTH_LONG).show();
@@ -194,6 +205,67 @@ android.view.View.OnClickListener {
 		} catch (Exception ex) {
 			Log.v("exception", ex.toString());
 			languageLoadSuccess = false;
+		}
+	}
+	
+	void saveData() {
+		List<Dictionary> dicList = dictionaryDao.loadAll();
+		String data = "<dictionaries>";
+		for (Dictionary dictionary : dicList) {
+			data += dictionary.toXMLString();
+		}
+		data += "</dictionaries>";
+		
+		String urlStr = GLOBAL.urlSaveData(sharedPreferences.getString(GLOBAL.USER_LOGGED_SESSION, "-1"), data);
+		Log.e("url", urlStr);
+		try {
+
+			InputStream in;
+			in = GLOBAL.OpenHttpConnection(urlStr);
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = dbf.newDocumentBuilder();
+			mainDoc = builder.parse(in);
+
+			NodeList nodeList = mainDoc.getElementsByTagName("ns:return");
+			if (nodeList.item(0).getTextContent().equals("done"))
+				saveDataLoadSuccess = true;
+			else
+				throw new Exception("trying to sendData error");
+			
+		} catch (Exception ex) {
+			Log.v("exception", ex.toString());
+			saveDataLoadSuccess = false;
+		}
+	}
+	
+	void retrieveData() {
+		String urlStr = GLOBAL.urlRetrieveData(sharedPreferences.getString(GLOBAL.USER_LOGGED_SESSION, "-1"));
+		Log.e("url", urlStr);
+		try {
+			
+			InputStream in;
+			in = GLOBAL.OpenHttpConnection(urlStr);
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = dbf.newDocumentBuilder();
+			mainDoc = builder.parse(in);
+
+			NodeList nodeList = mainDoc.getElementsByTagName("ns:return");
+			mainDoc = builder.parse( new InputSource( new StringReader( nodeList.item(0).getTextContent())));
+			nodeList = mainDoc.getElementsByTagName("dictionary");
+			if(nodeList.getLength() == 0){
+				retrieveDataLoadSuccess = false;
+				return;
+			}
+			
+			List<Dictionary> dictionaries = Dictionary.fromXMLString(nodeList);
+			for (Dictionary dictionary : dictionaries) {
+				dictionaryDao.insert(dictionary);
+			}
+			
+			retrieveDataLoadSuccess = true;
+		} catch (Exception ex) {
+			Log.v("exception", ex.toString());
+			retrieveDataLoadSuccess = false;
 		}
 	}
 }
