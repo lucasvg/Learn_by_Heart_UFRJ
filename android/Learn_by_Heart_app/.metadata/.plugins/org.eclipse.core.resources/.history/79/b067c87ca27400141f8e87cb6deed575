@@ -107,8 +107,8 @@ android.view.View.OnClickListener {
 				@Override
 				public void run() {
 					synchronizeLanguages();
-					retrieveData();
 					saveData();
+					retrieveData();
 
 					runOnUiThread(new Runnable() {
 						@Override

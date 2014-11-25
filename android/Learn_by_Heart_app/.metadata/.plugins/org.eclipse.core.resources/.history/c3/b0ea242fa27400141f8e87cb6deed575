@@ -63,7 +63,7 @@ public class AddEditDictionaryActivity extends ActionBarActivity {
 		userDao = daoSession.getUserDao();
 		userTypeDao = daoSession.getUserTypeDao();
 		
-//		languageList = languageDao.loadAll();
+		languageList = languageDao.loadAll();
 		
 		etName = (EditText) findViewById(R.id.activity_add_edit_dictionary_et_dictionary_name);
 		spDictionaryLanguage = (Spinner) findViewById(R.id.activity_add_edit_dictionary_sp_dictionary_language);

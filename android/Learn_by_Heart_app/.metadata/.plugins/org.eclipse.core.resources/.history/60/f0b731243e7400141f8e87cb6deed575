@@ -107,8 +107,8 @@ android.view.View.OnClickListener {
 				@Override
 				public void run() {
 					synchronizeLanguages();
-					retrieveData();
 					saveData();
+					retrieveData();
 
 					runOnUiThread(new Runnable() {
 						@Override
@@ -253,7 +253,7 @@ android.view.View.OnClickListener {
 			mainDoc = builder.parse( new InputSource( new StringReader( nodeList.item(0).getTextContent())));
 			nodeList = mainDoc.getElementsByTagName("dictionary");
 			if(nodeList.getLength() == 0){
-				if(mainDoc.getElementsByTagName("dictionaries").getLength() == 0)
+				if(mainDoc.getElementsByTagName("dictionary").getLength() == 0)
 					retrieveDataLoadSuccess = false;
 				else
 					retrieveDataLoadSuccess = true;
