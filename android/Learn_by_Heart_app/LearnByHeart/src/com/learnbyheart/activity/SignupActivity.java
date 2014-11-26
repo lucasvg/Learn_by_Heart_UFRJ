@@ -74,7 +74,6 @@ public class SignupActivity extends Activity implements android.view.View.OnClic
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
-					Log.e("url", urlStr);
 					doLongTask();
 
 					runOnUiThread(new Runnable() {

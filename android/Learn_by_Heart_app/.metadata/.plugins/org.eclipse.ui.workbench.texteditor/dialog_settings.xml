@@ -3,26 +3,26 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="312" key="DIALOG_WIDTH"/>
 		<item value="304" key="DIALOG_Y_ORIGIN"/>
+		<item value="1054" key="DIALOG_X_ORIGIN"/>
 		<item value="437" key="DIALOG_HEIGHT"/>
-		<item value="1462" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="isRegEx"/>
 		<item value="true" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="trying to sendData error" key="selection"/>
+		<item value="" key="selection"/>
 		<list key="findhistory">
-			<item value="trying to sendData error"/>
-			<item value="nodeList.item(0).getTextContent())"/>
-			<item value="meaning"/>
-			<item value="Meaning"/>
-			<item value="word"/>
-			<item value="Word"/>
-			<item value="dictionary"/>
-			<item value="Dictionary"/>
+			<item value="resu"/>
+			<item value="sharedPreferences"/>
+			<item value="persis"/>
+			<item value="getSh"/>
+			<item value="getsh"/>
+			<item value="urlStr"/>
+			<item value="close"/>
+			<item value="fini"/>
 		</list>
 		<list key="replacehistory">
 			<item value="example"/>

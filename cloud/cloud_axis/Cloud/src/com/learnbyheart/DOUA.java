@@ -569,12 +569,12 @@ public class DOUA {
         boolean ret = false;
         for (Session s : sessionContainer) {
             if (s.sessionHash.equals(sessionHash)) {
-                for (int rid : s.authorizedResources) {
-                    if (rid == resourseID) {
+//                for (int rid : s.authorizedResources) {
+//                    if (rid == resourseID) {
                         ret = true;
                         break;
-                    }
-                }
+//                    }
+//                }
             }
         }
         return ret;

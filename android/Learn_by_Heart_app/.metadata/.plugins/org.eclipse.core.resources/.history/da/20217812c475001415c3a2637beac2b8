@@ -1,0 +1,287 @@
+package com.learnbyheart.activity;
+
+import java.io.InputStream;
+import java.io.StringReader;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
+import android.widget.Toast;
+
+import com.learnbyheart.GLOBAL;
+import com.learnbyheart.R;
+import com.learnbyheart.greenDao.gen.bean.Dictionary;
+import com.learnbyheart.greenDao.gen.dao.DaoMaster;
+import com.learnbyheart.greenDao.gen.dao.DaoMaster.DevOpenHelper;
+import com.learnbyheart.greenDao.gen.dao.DaoSession;
+import com.learnbyheart.greenDao.gen.dao.DictionaryDao;
+import com.learnbyheart.greenDao.gen.dao.LanguageDao;
+
+public class MainActivity extends ActionBarActivity implements
+android.view.View.OnClickListener {
+
+	private ImageButton ibDictionary;
+	private SharedPreferences sharedPreferences;
+	private final String MY_PREFERENCES = GLOBAL.MyPREFERENCES;
+	
+	private ProgressDialog progress;
+	private Document mainDoc;
+	private Boolean languageLoadSuccess = false;
+	private Boolean saveDataLoadSuccess = false;
+	private Boolean retrieveDataLoadSuccess = false;
+	
+	private SQLiteDatabase db;
+	private DaoMaster daoMaster;
+	private DaoSession daoSession;
+	private LanguageDao languageDao;
+	private DictionaryDao dictionaryDao;
+	
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ibDictionary = (ImageButton) findViewById(R.id.ibOpenActivityDictionary);
+		ibDictionary.setOnClickListener((OnClickListener) this);
+		
+        // inicializing DAOs
+        DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "db_learnbyheart", null);
+		db = helper.getWritableDatabase();
+		daoMaster = new DaoMaster(db);
+		daoSession = daoMaster.newSession();
+		languageDao = daoSession.getLanguageDao();
+		dictionaryDao = daoSession.getDictionaryDao();
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        switch (itemId) {
+		case R.id.action_logout:
+			Editor sharedPreferencesEditor = sharedPreferences.edit();
+			sharedPreferencesEditor.remove(GLOBAL.USER_LOGGED_SESSION);
+			sharedPreferencesEditor.apply();
+			DaoMaster.dropAllTables(db, true);
+			DaoMaster.createAllTables(db, false);
+        	Intent i = new Intent("android.intent.action.login");
+			startActivity(i);
+			break;
+			
+		case R.id.action_synchronize:
+			// getting available languages
+			progress = new ProgressDialog(this);
+			progress.setMessage("accessing the cloud");
+			progress.setTitle("wait");
+			// progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			progress.setCancelable(true);
+			progress.setProgress(0);
+			progress.show();
+			
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					synchronizeLanguages();
+					saveData();
+					retrieveData();
+
+					runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							progress.dismiss();
+							Log.v("taskdone", "==== taskdone");
+
+							// if userSession = null, then httpConnection failed
+							if(!languageLoadSuccess || !saveDataLoadSuccess || !retrieveDataLoadSuccess){
+								 Toast.makeText(getApplicationContext(), "Failed synchronizing!", Toast.LENGTH_LONG).show();
+							}else{
+								Toast.makeText(getApplicationContext(), "Done synchronizing!", Toast.LENGTH_LONG).show();
+							}
+						}
+					});
+				}
+			}).start();
+			// end getting available languages
+			break;
+
+		default:
+			break;
+		}
+        
+        return true;
+    }
+    
+    @Override
+	protected void onDestroy() {
+		db.close();
+		super.onDestroy();
+	}
+    
+	@Override
+	public void onClick(View v) {
+		int id = v.getId();
+		switch (id) {
+		case R.id.ibOpenActivityDictionary:
+			Intent i = new Intent("android.intent.action.dictionary");
+			startActivity(i);
+			break;
+
+		default:
+			break;
+		}
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+		// VERIFY LOGGED USER
+		sharedPreferences = getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE);
+		// IF is logged
+		if (!(sharedPreferences.contains(GLOBAL.USER_LOGGED_SESSION) && (sharedPreferences.getString(GLOBAL.USER_LOGGED_SESSION, "-1")!="-1"))){
+
+			// IF has opened the login activity once
+			if ((sharedPreferences.contains(GLOBAL.hasOpenedLoginActivity) && (sharedPreferences.getBoolean(GLOBAL.hasOpenedLoginActivity, false)))){
+				Editor sharedPreferencesEditor = sharedPreferences.edit();
+				sharedPreferencesEditor.putBoolean(GLOBAL.hasOpenedLoginActivity, false);
+				sharedPreferencesEditor.apply();
+				finish();
+			}else{
+				Editor sharedPreferencesEditor = sharedPreferences.edit();
+				sharedPreferencesEditor.putBoolean(GLOBAL.hasOpenedLoginActivity, true);
+				sharedPreferencesEditor.apply();
+				Intent i = new Intent("android.intent.action.login");
+				startActivity(i);	
+			}
+			
+		}
+		// END VERIFY LOGGED USER
+	}
+	
+	boolean isLogged(){
+		
+	}
+
+	void synchronizeLanguages() {
+		String urlStr = GLOBAL.urlGetLanguages(sharedPreferences.getString(GLOBAL.USER_LOGGED_SESSION, "-1"));
+		try {
+			
+			InputStream in;
+			in = GLOBAL.OpenHttpConnection(urlStr);
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = dbf.newDocumentBuilder();
+			mainDoc = builder.parse(in);
+
+			NodeList nodeList = mainDoc.getElementsByTagName("ns:return");
+			for(int i =0; i < nodeList.getLength(); i++){
+				try {
+					languageDao.insert(GLOBAL.parseLanguageWithToken(nodeList.item(i).getTextContent()));	
+				} catch (Exception e) {
+					Log.v("error on languages synchronization", e.toString());
+				}
+			}
+			
+			// saving languages into DB
+			
+			// end saving languages into DB
+
+			languageLoadSuccess = true;
+		} catch (Exception ex) {
+			Log.v("exception", ex.toString());
+			languageLoadSuccess = false;
+		}
+	}
+	
+	void saveData() {
+		List<Dictionary> dicList = dictionaryDao.loadAll();
+		String data = "<dictionaries>";
+		for (Dictionary dictionary : dicList) {
+			Log.e("enviando dictionary userId = ", String.valueOf(dictionary.getUserId()));
+			data += dictionary.toXMLString();
+		}
+		data += "</dictionaries>";
+		
+		String urlStr = GLOBAL.urlSaveData(sharedPreferences.getString(GLOBAL.USER_LOGGED_SESSION, "-1"), data);
+		try {
+
+			InputStream in;
+			in = GLOBAL.OpenHttpConnection(urlStr);
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = dbf.newDocumentBuilder();
+			mainDoc = builder.parse(in);
+
+			NodeList nodeList = mainDoc.getElementsByTagName("ns:return");
+			if (nodeList.item(0).getTextContent().equals("done")){
+				saveDataLoadSuccess = true;
+				dictionaryDao.deleteAll();
+			}
+			else
+				throw new Exception("trying to sendData error");
+			
+		} catch (Exception ex) {
+			Log.v("exception", ex.toString());
+			saveDataLoadSuccess = false;
+		}
+	}
+	
+	void retrieveData() {
+		String urlStr = GLOBAL.urlRetrieveData(sharedPreferences.getString(GLOBAL.USER_LOGGED_SESSION, "-1"), String.valueOf(sharedPreferences.getLong(GLOBAL.USER_LOGGED_ID, -1)));
+		try {
+			
+			InputStream in;
+			in = GLOBAL.OpenHttpConnection(urlStr);
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = dbf.newDocumentBuilder();
+			mainDoc = builder.parse(in);
+
+			NodeList nodeList = mainDoc.getElementsByTagName("ns:return");
+			mainDoc = builder.parse( new InputSource( new StringReader( nodeList.item(0).getTextContent())));
+			nodeList = mainDoc.getElementsByTagName("dictionary");
+			if(nodeList.getLength() == 0){
+				if(mainDoc.getElementsByTagName("dictionaries").getLength() == 0)
+					retrieveDataLoadSuccess = false;
+				else
+					retrieveDataLoadSuccess = true;
+				return;
+			}
+			
+			List<Dictionary> dictionaries = Dictionary.fromXMLString(nodeList);
+			for (Dictionary dictionary : dictionaries) {
+				Log.e("recebendo dictionary userId = ", String.valueOf(dictionary.getUserId()));
+				dictionaryDao.insert(dictionary);
+			}
+			
+			retrieveDataLoadSuccess = true;
+		} catch (Exception ex) {
+			Log.v("exception", ex.toString());
+			retrieveDataLoadSuccess = false;
+		}
+	}
+}

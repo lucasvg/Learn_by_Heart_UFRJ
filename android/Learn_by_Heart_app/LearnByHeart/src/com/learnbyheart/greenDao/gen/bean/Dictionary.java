@@ -219,7 +219,7 @@ public class Dictionary {
     	str += "<name>" + this.name + "</name>";
     	str += "<isPublic>" + this.isPublic + "</isPublic>";
 //    	str += "<userId>" + this.userId + "</userId>";
-    	str += "<userId>" + 32 + "</userId>";
+    	str += "<userId>" + this.userId + "</userId>";
     	str += "<languageId>" + this.languageId + "</languageId>";
     	
     	str += "<words>";

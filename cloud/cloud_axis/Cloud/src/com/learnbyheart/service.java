@@ -51,8 +51,13 @@ public class service {
         return DouaController.saveData(sessionHash, data);
     }
     
-    public static String retrieveData(String sessionHash) throws ClassNotFoundException, SQLException{
-        return DouaController.retrieveData(sessionHash);
+    public static String retrieveData(String sessionHash, String userId) throws ClassNotFoundException, SQLException{
+        if(userId == null || userId.equals("") || userId.equals("-1")){
+            return DouaController.retrieveData(sessionHash);
+        }else{
+            System.out.println("foi espeficiado o usuario");
+            return DouaController.retrieveData(sessionHash, userId);
+        }
     }
     
 }

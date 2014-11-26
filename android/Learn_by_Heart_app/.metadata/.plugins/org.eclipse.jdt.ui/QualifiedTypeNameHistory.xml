@@ -38,9 +38,7 @@
 <fullyQualifiedTypeName name="java.lang.Long"/>
 <fullyQualifiedTypeName name="com.learnbyheart.R.id"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
-<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.bean.Language"/>
 <fullyQualifiedTypeName name="android.provider.Settings.Global"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.learnbyheart.GenericUtilFunctions"/>
 <fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.dao.LanguageDao"/>
 <fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.bean.Meaning"/>
@@ -53,4 +51,8 @@
 <fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.bean.Dictionary"/>
 <fullyQualifiedTypeName name="org.xml.sax.InputSource"/>
 <fullyQualifiedTypeName name="java.io.StringReader"/>
+<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.bean.Language"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.dao.MeaningDao"/>
+<fullyQualifiedTypeName name="com.learnbyheart.greenDao.gen.dao.DaoMaster"/>
 </qualifiedTypeNameHistroy>

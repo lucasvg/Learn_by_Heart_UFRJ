@@ -144,7 +144,7 @@ public class DouaController {
             }
             
             for (Dictionary dictionary : dictionaries) {
-                log.log(Level.INFO, DaoDictionary.createDictionary(dictionary.getName(), dictionary.isIsPublic(), dictionary.getUserId(), dictionary.getLanguageId()));
+                log.log(Level.INFO, DaoDictionary.createOrUpdateDictionary(dictionary.getId(), dictionary.getName(), dictionary.isIsPublic(), dictionary.getUserId(), dictionary.getLanguageId()));
             }
             
             return "done";
@@ -158,6 +158,15 @@ public class DouaController {
     static String retrieveData(String sessionHash) throws ClassNotFoundException, SQLException {
         if (doua.usecaseAuthorized(sessionHash, RESOURCE_ID_DEFAULT)) {            
             return DaoDictionary.readDictionary();
+        } else {
+            System.out.println("notlooged");
+            return null;
+        }
+    }
+    
+    static String retrieveData(String sessionHash, String userId) throws ClassNotFoundException, SQLException {
+        if (doua.usecaseAuthorized(sessionHash, RESOURCE_ID_DEFAULT)) {            
+            return DaoDictionary.readDictionary(userId);
         } else {
             System.out.println("notlooged");
             return null;

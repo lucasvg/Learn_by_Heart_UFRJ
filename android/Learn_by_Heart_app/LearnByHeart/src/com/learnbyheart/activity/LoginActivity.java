@@ -80,7 +80,6 @@ public class LoginActivity extends Activity implements android.view.View.OnClick
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
-					Log.e("url", urlStr);
 					doLongTask();
 
 					runOnUiThread(new Runnable() {
@@ -128,5 +127,5 @@ public class LoginActivity extends Activity implements android.view.View.OnClick
 			userId = null;
 		}
 	}
-
+	
 }

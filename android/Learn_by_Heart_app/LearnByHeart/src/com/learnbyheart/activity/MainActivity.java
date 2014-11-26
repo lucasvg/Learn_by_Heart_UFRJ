@@ -55,6 +55,7 @@ android.view.View.OnClickListener {
 	private LanguageDao languageDao;
 	private DictionaryDao dictionaryDao;
 	
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +70,6 @@ android.view.View.OnClickListener {
 		daoSession = daoMaster.newSession();
 		languageDao = daoSession.getLanguageDao();
 		dictionaryDao = daoSession.getDictionaryDao();
-		
     }
 
 
@@ -85,11 +85,7 @@ android.view.View.OnClickListener {
         int itemId = item.getItemId();
         switch (itemId) {
 		case R.id.action_logout:
-			Editor sharedPreferencesEditor = sharedPreferences.edit();
-			sharedPreferencesEditor.remove(GLOBAL.USER_LOGGED_SESSION);
-			sharedPreferencesEditor.apply();
-        	Intent i = new Intent("android.intent.action.login");
-			startActivity(i);
+			loggout();
 			break;
 			
 		case R.id.action_synchronize:
@@ -107,8 +103,8 @@ android.view.View.OnClickListener {
 				@Override
 				public void run() {
 					synchronizeLanguages();
-					retrieveData();
 					saveData();
+					retrieveData();
 
 					runOnUiThread(new Runnable() {
 						@Override
@@ -136,6 +132,23 @@ android.view.View.OnClickListener {
         return true;
     }
     
+    private void loggout() {
+    	Editor sharedPreferencesEditor = sharedPreferences.edit();
+		sharedPreferencesEditor.remove(GLOBAL.USER_LOGGED_SESSION);
+		sharedPreferencesEditor.apply();
+		DaoMaster.dropAllTables(db, true);
+		DaoMaster.createAllTables(db, false);
+    	Intent i = new Intent("android.intent.action.login");
+		startActivity(i);
+	}
+
+
+	@Override
+	protected void onDestroy() {
+		db.close();
+		super.onDestroy();
+	}
+    
 	@Override
 	public void onClick(View v) {
 		int id = v.getId();
@@ -157,8 +170,7 @@ android.view.View.OnClickListener {
 		// VERIFY LOGGED USER
 		sharedPreferences = getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE);
 		// IF is logged
-		if (!(sharedPreferences.contains(GLOBAL.USER_LOGGED_SESSION) && (sharedPreferences.getString(GLOBAL.USER_LOGGED_SESSION, "-1")!="-1"))){
-
+		if (!isLogged()){
 			// IF has opened the login activity once
 			if ((sharedPreferences.contains(GLOBAL.hasOpenedLoginActivity) && (sharedPreferences.getBoolean(GLOBAL.hasOpenedLoginActivity, false)))){
 				Editor sharedPreferencesEditor = sharedPreferences.edit();
@@ -166,20 +178,40 @@ android.view.View.OnClickListener {
 				sharedPreferencesEditor.apply();
 				finish();
 			}else{
+				Toast.makeText(getApplicationContext(), "You are not logged. Please sign in.", Toast.LENGTH_LONG).show();
 				Editor sharedPreferencesEditor = sharedPreferences.edit();
 				sharedPreferencesEditor.putBoolean(GLOBAL.hasOpenedLoginActivity, true);
 				sharedPreferencesEditor.apply();
-				Intent i = new Intent("android.intent.action.login");
-				startActivity(i);	
+				loggout();
 			}
 			
 		}
 		// END VERIFY LOGGED USER
 	}
+	
+	boolean isLogged(){
+		String urlStr = GLOBAL.urlGetLanguages(sharedPreferences.getString(GLOBAL.USER_LOGGED_SESSION, "-1"));
+		try {
+			InputStream in;
+			in = GLOBAL.OpenHttpConnection(urlStr);
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = dbf.newDocumentBuilder();
+			mainDoc = builder.parse(in);
+
+			NodeList nodeList = mainDoc.getElementsByTagName("ns:return");
+			GLOBAL.parseLanguageWithToken(nodeList.item(2).getTextContent());
+			if(nodeList.getLength() < 1)
+				return false;
+		} catch (Exception ex) {
+			return false;
+		}
+		return true;
+//		return !(sharedPreferences.contains(GLOBAL.USER_LOGGED_SESSION) && (sharedPreferences.getString(GLOBAL.USER_LOGGED_SESSION, "-1")!="-1"));
+		
+	}
 
 	void synchronizeLanguages() {
 		String urlStr = GLOBAL.urlGetLanguages(sharedPreferences.getString(GLOBAL.USER_LOGGED_SESSION, "-1"));
-		Log.e("url", urlStr);
 		try {
 			
 			InputStream in;
@@ -212,12 +244,12 @@ android.view.View.OnClickListener {
 		List<Dictionary> dicList = dictionaryDao.loadAll();
 		String data = "<dictionaries>";
 		for (Dictionary dictionary : dicList) {
+			Log.e("enviando dictionary userId = ", String.valueOf(dictionary.getUserId()));
 			data += dictionary.toXMLString();
 		}
 		data += "</dictionaries>";
 		
 		String urlStr = GLOBAL.urlSaveData(sharedPreferences.getString(GLOBAL.USER_LOGGED_SESSION, "-1"), data);
-		Log.e("url", urlStr);
 		try {
 
 			InputStream in;
@@ -227,8 +259,10 @@ android.view.View.OnClickListener {
 			mainDoc = builder.parse(in);
 
 			NodeList nodeList = mainDoc.getElementsByTagName("ns:return");
-			if (nodeList.item(0).getTextContent().equals("done"))
+			if (nodeList.item(0).getTextContent().equals("done")){
 				saveDataLoadSuccess = true;
+				dictionaryDao.deleteAll();
+			}
 			else
 				throw new Exception("trying to sendData error");
 			
@@ -239,8 +273,7 @@ android.view.View.OnClickListener {
 	}
 	
 	void retrieveData() {
-		String urlStr = GLOBAL.urlRetrieveData(sharedPreferences.getString(GLOBAL.USER_LOGGED_SESSION, "-1"));
-		Log.e("url", urlStr);
+		String urlStr = GLOBAL.urlRetrieveData(sharedPreferences.getString(GLOBAL.USER_LOGGED_SESSION, "-1"), String.valueOf(sharedPreferences.getLong(GLOBAL.USER_LOGGED_ID, -1)));
 		try {
 			
 			InputStream in;
@@ -262,6 +295,7 @@ android.view.View.OnClickListener {
 			
 			List<Dictionary> dictionaries = Dictionary.fromXMLString(nodeList);
 			for (Dictionary dictionary : dictionaries) {
+				Log.e("recebendo dictionary userId = ", String.valueOf(dictionary.getUserId()));
 				dictionaryDao.insert(dictionary);
 			}
 			

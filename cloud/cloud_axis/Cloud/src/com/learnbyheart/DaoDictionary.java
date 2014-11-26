@@ -41,7 +41,6 @@ public class DaoDictionary {
      * @return - primary key of created author
      */
     static String createDictionary(final String name, final Boolean isPublic, final Long userId, final Long languageId) throws ClassNotFoundException, SQLException {
-//        static String createDictionary(final Dictionary dictionary) {
 
         Database_Base dbb = new Database_Base() {
             @Override
@@ -73,6 +72,58 @@ public class DaoDictionary {
         return dbb.returnString();
     }
     
+    static String createOrUpdateDictionary(final Long _id, final String name, final Boolean isPublic, final Long userId, final Long languageId) throws ClassNotFoundException, SQLException {
+
+        Database_Base dbb = new Database_Base() {
+            @Override
+            void evaluate() throws SQLException {
+                
+                if (_id == null || name == null || isPublic == null || userId == null || languageId == null) {
+                    ret = null;
+                }if (name.equals("") || _id == 0 || _id == -1){
+                    ret = null;
+                }                
+                else {
+
+                    ResultSet rs3 = stmt.executeQuery("select count(*) from dictionary where _id=" + _id + " and user_id=" + userId);
+                    rs3.next();
+                    int nLines = rs3.getInt(1);
+                    
+                    System.out.println(nLines);
+                    
+                    // if is an creation or update of an dictionary
+                    if(nLines == 0){
+                        String sql = "INSERT INTO dictionary(name, is_public, user_id, language_id) VALUES ('"
+                                    + name + "','"
+                                    + ((isPublic) ? 1:0) + "',"
+                                    + userId + ","
+                                    + languageId 
+                                    + ")";
+                        log.log(Level.INFO, "=== createDictionary sql=" + sql);
+                        int rs = stmt.executeUpdate(sql);
+                        sql = "select LAST_INSERT_ID();";
+                        log.log(Level.INFO, "=== createDictionary sql=" + sql);
+                        ResultSet rs2 = stmt.executeQuery(sql);
+                        rs2.next();
+                        int primaryKey = rs2.getInt(1);
+                        ret = "" + primaryKey;
+                    }else if (nLines ==1){
+                        String sql = "update dictionary set name=\"" +
+                                name + "\", is_public=" +
+                                + ((isPublic) ? 1:0) + ", language_id=" +
+                                + languageId + " where _id="
+                                + _id;
+                        log.log(Level.INFO, "=== UpdateDictionary sql=" + sql);
+                        int rs = stmt.executeUpdate(sql);
+                        ret = "" + _id;
+                        
+                    }
+                }
+            }
+        };
+        return dbb.returnString();
+    }
+    
     static String readDictionary() throws ClassNotFoundException, SQLException {
 //        static String createDictionary(final Dictionary dictionary) {
 
@@ -85,6 +136,42 @@ public class DaoDictionary {
                 log.log(Level.INFO, "=== readDictionary lines in table=" + nLines);
                 retArray = new String[nLines];
                 rs = stmt.executeQuery("select _id, name, is_public, user_id, language_id from dictionary");
+                log.log(Level.INFO, "=== readDictionary lines in table=" + nLines);
+                rs.next();
+                int rowCount = 0;
+                // for each line of ResultSet
+                
+                ret = "<dictionaries>";
+                for (int i = 0; i < nLines; i++) {
+                    log.log(Level.INFO, "=== loop readDictionary lines in table=" + nLines);
+                    Dictionary dictionary = new Dictionary(
+                            Long.valueOf(rs.getString("_id")), 
+                            rs.getString("name"),
+                            Boolean.valueOf(rs.getString("is_public")),
+                            Long.valueOf(rs.getString("user_id")), 
+                            Long.valueOf(rs.getString("language_id")));
+                    ret += dictionary.toXMLString();
+                    rs.next();
+                }
+                ret += "</dictionaries>";
+                log.log(Level.INFO, "=== readDictionary lines in table=" + nLines);
+                }
+        };
+        return dbb.returnString();
+    }
+    
+    static String readDictionary(final String userId) throws ClassNotFoundException, SQLException {
+//        static String createDictionary(final Dictionary dictionary) {
+
+        Database_Base dbb = new Database_Base() {
+            @Override
+            void evaluate() throws SQLException {
+                ResultSet rs = stmt.executeQuery("select count(*) from dictionary where user_id=" + userId);
+                rs.next();
+                int nLines = rs.getInt(1);
+                log.log(Level.INFO, "=== readDictionary lines in table=" + nLines);
+                retArray = new String[nLines];
+                rs = stmt.executeQuery("select _id, name, is_public, user_id, language_id from dictionary where user_id=" + userId);
                 log.log(Level.INFO, "=== readDictionary lines in table=" + nLines);
                 rs.next();
                 int rowCount = 0;

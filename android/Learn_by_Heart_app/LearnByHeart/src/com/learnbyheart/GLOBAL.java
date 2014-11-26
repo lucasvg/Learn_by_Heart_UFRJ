@@ -7,6 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 
+import android.util.Log;
+
 import com.learnbyheart.greenDao.gen.bean.Language;
 
 public class GLOBAL {
@@ -25,23 +27,33 @@ public class GLOBAL {
 	private static final String IP = "54.173.106.139";
 	
 	public static final String urlLogin(String userLogin, String pwd){
-		return String.format("http://" + IP + "/axis2/services/service/lazyLogin?userLogin=%s&pwd=%s", userLogin, pwd);
+		String urlStr = String.format("http://" + IP + "/axis2/services/service/lazyLogin?userLogin=%s&pwd=%s", userLogin, pwd);
+		Log.e("url", urlStr);
+		return urlStr;
 	}
 	
 	public static final String urlSignup(String name, String userLogin, String pwd, String email){
-		return String.format("http://" + IP + "/axis2/services/service/createUser?name=%s&login=%s&password=%s&email=%s", name, userLogin, pwd, email);
+		String urlStr = String.format("http://" + IP + "/axis2/services/service/createUser?name=%s&login=%s&password=%s&email=%s", name, userLogin, pwd, email);
+		Log.e("url", urlStr);
+		return urlStr;
 	}
 	
 	public static final String urlGetLanguages(String sessionHash){
-		return String.format("http://" + IP + "/axis2/services/service/getLanguages?sessionHash=%s", sessionHash);
+		String urlStr = String.format("http://" + IP + "/axis2/services/service/getLanguages?sessionHash=%s", sessionHash);
+		Log.e("url", urlStr);
+		return urlStr;
 	}
 	
 	public static final String urlSaveData(String sessionHash, String data){
-		return String.format("http://" + IP + "/axis2/services/service/saveData?sessionHash=%s&data=%s", sessionHash, data);
+		String urlStr = String.format("http://" + IP + "/axis2/services/service/saveData?sessionHash=%s&data=%s", sessionHash, data);
+		Log.e("url", urlStr);
+		return urlStr;
 	}
 	
-	public static final String urlRetrieveData(String sessionHash){
-		return String.format("http://" + IP + "/axis2/services/service/retrieveData?sessionHash=%s", sessionHash);
+	public static final String urlRetrieveData(String sessionHash, String userId){
+		String urlStr = String.format("http://" + IP + "/axis2/services/service/retrieveData?sessionHash=%s&userId=%s", sessionHash, userId);
+		Log.e("url", urlStr);
+		return urlStr;
 	}
 	
 	public static final Language parseLanguageWithToken(String languageString){

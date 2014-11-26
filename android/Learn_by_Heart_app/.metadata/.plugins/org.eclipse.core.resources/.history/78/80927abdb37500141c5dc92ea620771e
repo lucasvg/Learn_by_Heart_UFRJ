@@ -1,0 +1,159 @@
+package com.learnbyheart.activity;
+
+import java.util.List;
+
+import android.app.ListActivity;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import com.learnbyheart.GLOBAL;
+import com.learnbyheart.GenericUtilFunctions;
+import com.learnbyheart.R;
+import com.learnbyheart.greenDao.gen.bean.Dictionary;
+import com.learnbyheart.greenDao.gen.dao.DaoMaster;
+import com.learnbyheart.greenDao.gen.dao.DaoMaster.DevOpenHelper;
+import com.learnbyheart.greenDao.gen.dao.DaoSession;
+import com.learnbyheart.greenDao.gen.dao.DictionaryDao;
+
+public class DictionaryActivity extends ListActivity{
+	ListView l;
+	List<Dictionary> dictionaryList;
+	
+	//useful to populate the listActivity
+	String[] dictionaryNameList;
+	
+	private SQLiteDatabase db;
+	private DaoMaster daoMaster;
+	private DaoSession daoSession;
+	private DictionaryDao dictionaryDao;
+	private GenericUtilFunctions<Dictionary> util;
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.listview);
+        
+        setTitle("Dictionaries");
+        
+        // getting dictionary from DB
+        DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, GLOBAL.DB_NAME, null);
+		db = helper.getWritableDatabase();
+		daoMaster = new DaoMaster(db);
+		daoSession = daoMaster.newSession();
+		dictionaryDao = daoSession.getDictionaryDao();
+		try {
+			dictionaryList = dictionaryDao.loadAll();
+			util = new GenericUtilFunctions<Dictionary>();
+			dictionaryNameList = util.getListToString(dictionaryList);
+		} catch (Exception e) {
+			Log.e("dictionaries loading", e.toString());
+		}
+
+		// populating ListView
+		l = getListView();
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dictionaryNameList);
+		l.setAdapter(adapter);
+		
+		
+		this.getListView().setLongClickable(true);
+		this.getListView().setOnItemLongClickListener(new OnItemLongClickListener() {
+		    public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
+//		    	Log.v("dic xml",  dictionaryList.get(position).toXMLString());
+		    	
+//		    	String str = "<dictionary><id>1</id><name>MyDic</name><isPublic>true</isPublic><userId>1</userId><languageId>9</languageId><words></words></dictionary>";
+//		    	
+//				try {
+//					DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+//					DocumentBuilder builder = dbf.newDocumentBuilder();;
+//					Document mainDoc = builder.parse( new InputSource( new StringReader( str ) ) ); 
+//					NodeList nodeList = mainDoc.getElementsByTagName("dictionary");
+//					Dictionary dictionary = Dictionary.fromXMLString(nodeList.item(0));
+//					
+//					Log.v("ss", dictionary.getWords().get(0).getMeanings().get(0).getExamples().get(0).getExample());
+//				} catch (ParserConfigurationException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (SAXException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (Exception e) {
+//					Log.e("my", e.toString());
+//				}
+		    	
+		    	return true;
+		    }
+		});
+		
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_create, menu);
+        return true;
+    }
+    
+    @Override
+	protected void onDestroy() {
+		db.close();
+		super.onDestroy();
+	}
+    
+    @Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int itemId = item.getItemId();
+		if (itemId == R.id.btnActionBar_create) {
+			Intent i = new Intent("android.intent.action.add_edit_dictionary");
+			i.putExtra("_id", -1L);
+			startActivityForResult(i, 1);
+		}
+		return true;
+	}
+    
+	@Override
+	protected void onDestroy() {
+		db.close();
+		super.onDestroy();
+	}
+	
+	@Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == RESULT_OK) { // request code for
+			try {
+				dictionaryList = dictionaryDao.loadAll();
+				dictionaryNameList = util.getListToString(dictionaryList);
+				
+				// populating ListView
+				l = getListView();
+				ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dictionaryNameList);
+				l.setAdapter(adapter);
+				// end populating ListView
+				
+			} catch (Exception e) {
+				Log.e("ActivityDicionaries", e.toString());
+			}
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		Intent i = new Intent("android.intent.action.word");
+		i.putExtra(GLOBAL.dictionaryId, dictionaryList.get(position).getId());
+		startActivity(i);
+		super.onListItemClick(l, v, position, id);
+	}
+
+}
